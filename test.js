@@ -63,7 +63,8 @@ if (icon = SDL_CreateRGBSurface(0, 32, 32, 32, 0, 0, 0, 0)) {
 } else fatal();
 const renderer = SDL_CreateRenderer(
   window,
-  SDL_GetNumRenderDrivers() > 1 ? 1 : -1,
+  // DirectX 11 On Windows
+  (process.platform == 'win32' && SDL_GetNumRenderDrivers() > 1) ? 1 : -1,
   SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
 );
 if (renderer == null)
