@@ -1,0 +1,54 @@
+const {
+  e,
+  l,
+  ffi,
+  ref,
+  Struct,
+  Union,
+  from_hex,
+  en,
+  push_export,
+  push_functions
+} = require('./api');
+
+e.JOYSTICK_TYPE_UNKNOWN = en(0);
+e.JOYSTICK_TYPE_GAMECONTROLLER = en();
+e.JOYSTICK_TYPE_WHEEL = en();
+e.JOYSTICK_TYPE_ARCADE_STICK = en();
+e.JOYSTICK_TYPE_FLIGHT_STICK = en();
+e.JOYSTICK_TYPE_DANCE_PAD = en();
+e.JOYSTICK_TYPE_GUITAR = en();
+e.JOYSTICK_TYPE_DRUM_KIT = en();
+e.JOYSTICK_TYPE_ARCADE_PAD = en();
+e.JOYSTICK_TYPE_THROTTLE = en();
+
+e.JOYSTICK_POWER_UNKNOWN = en(-1);
+e.JOYSTICK_POWER_EMPTY = en();
+e.JOYSTICK_POWER_LOW = en();
+e.JOYSTICK_POWER_MEDIUM = en();
+e.JOYSTICK_POWER_FULL = en();
+e.JOYSTICK_POWER_WIRED = en();
+e.JOYSTICK_POWER_MAX = en();
+
+e.SDL_IPHONE_MAX_GFORCE = 5.0;
+
+e.SDL_JOYSTICK_AXIS_MAX = 32767;
+e.SDL_JOYSTICK_AXIS_MIN = -32768;
+
+e.SDL_HAT_CENTERED = 0x00;
+e.SDL_HAT_UP = 0x01;
+e.SDL_HAT_RIGHT = 0x02;
+e.SDL_HAT_DOWN = 0x04;
+e.SDL_HAT_LEFT = 0x008;
+e.SDL_HAT_RIGHTUP = e.SDL_HAT_RIGHT | e.SDL_HAT_UP;
+e.SDL_HAT_RIGHTDOWN = e.SDL_HAT_RIGHT | e.SDL_HAT_DOWN;
+e.SDL_HAT_LEFTUP = e.SDL_HAT_LEFT | e.SDL_HAT_UP;
+e.SDL_HAT_LEFTDOWN = e.SDL_HAT_LEFT | e.SDL_HAT_DOWN;
+
+e.JoystickGUID = Struct({
+  data: 'Uint8*'
+});
+
+push_export({
+  // TODO: ...
+});

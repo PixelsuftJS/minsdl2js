@@ -1,0 +1,6 @@
+node_modules
+package-lock.json
+*.dll
+__pycache__
+.idea
+*.py
