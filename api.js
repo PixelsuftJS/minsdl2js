@@ -17,8 +17,13 @@ exports.Struct = Struct;
 exports.Union = Union;
 exports.library_exports = library_exports;
 exports.library_functions = library_functions;
+exports.ignore_list = [];
 exports.join_exports = function() {
-  return Object.assign({}, ...exports.library_exports);
+  var result = Object.assign({}, ...exports.library_exports);
+  for (var i = 0; i < exports.ignore_list.length; i++) {
+    delete result[exports.ignore_list];
+  }
+  return result;
 }
 exports.join_functions = function() {
   return Object.assign({}, ...exports.library_functions);

@@ -7,6 +7,7 @@ npm i minsdl2js
 ## Examples
 See [`test.js`](https://github.com/Pixelsuft/minsdl2js/blob/main/test.js)
 ## TODO
+- Callbacks are void* <br />
 - OpenGL <br />
 - Joystick/Controller Functions <br />
 - SDL2_net, SDL2_ttf, SDL2_image, SDL2_mixer, SDL2_gfx <br />

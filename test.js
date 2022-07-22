@@ -20,7 +20,7 @@ function random_color() {
     Math.floor(Math.random() * 255);
 }
 
-sdl2.load_sdl2_library('SDL2.dll');
+sdl2.load_sdl2_library('SDL2.dll', ignore_list=[]);
 sdl2.export_sdl2_library(global);
 if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS))
   fatal();
@@ -147,6 +147,8 @@ function tick() {
         speed_y *= -1;
         if (random_bool()) speed_x *= -1;
       }
+      speed_x = (speed_x > 0 ? 1 : -1) * 250 * (Math.random() + 0.5);
+      speed_y = (speed_y > 0 ? 1 : -1) * 250 * (Math.random() + 0.5);
     }
   } else if (is_colliding)
     is_colliding = false;

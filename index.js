@@ -32,7 +32,8 @@ require('./video');
 require('./render');
 
 // TODO: Fix shitcode (I'm noob in JS)
-exports.load_sdl2_library = function(library_path) {
+exports.load_sdl2_library = function(library_path, ignore_list = []) {
+  api.ignore_list = ignore_list;
   api.library = api.ffi.Library(library_path, api.join_exports());
   Object.entries(api.join_functions()).forEach(([key, value]) => {
     eval('api.library.' + key + ' = value');
