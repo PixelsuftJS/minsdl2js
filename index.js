@@ -73,4 +73,15 @@ exports.export_sdl2_ttf_library = function(export_obj) {
   return export_obj;
 }
 
+exports.load_sdl2_mixer_library = function(library_path, ...ignore_list) {
+  api.mixer_library = api.ffi.Library(library_path, api.clear_ignore(require('./mixer').library_exports, ignore_list));
+  return api.mixer_library;
+}
+exports.export_sdl2_mixer_library = function(export_obj) {
+  Object.entries(require('./mixer').library_exports).forEach(([key, value]) => {
+    eval('export_obj.' + key + ' = api.mixer_library.' + key);
+  });
+  return export_obj;
+}
+
 exports.sdl2 = api;

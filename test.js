@@ -37,14 +37,18 @@ sdl2.load_sdl2_library(
 );
 sdl2.load_sdl2_image_library((process.platform == 'win32' ? '' : 'lib') + 'SDL2_image');
 sdl2.load_sdl2_ttf_library((process.platform == 'win32' ? '' : 'lib') + 'SDL2_ttf');
+sdl2.load_sdl2_mixer_library((process.platform == 'win32' ? '' : 'lib') + 'SDL2_mixer');
 sdl2.export_sdl2_library(global);
 sdl2.export_sdl2_image_library(global);
 sdl2.export_sdl2_ttf_library(global);
+sdl2.export_sdl2_mixer_library(global);
 if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_AUDIO))
   fatal();
 if (!IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG))
   fatal();
 if (TTF_Init())
+  fatal();
+if (!Mix_Init(MIX_INIT_MP3 | MIX_INIT_OGG | MIX_INIT_MID | MIX_INIT_OPUS))
   fatal();
 log(`CPU: ${SDL_GetCPUCount()} CPUs, RAM: ${SDL_GetSystemRAM()}MB`);
 log('Platform:', SDL_GetPlatform());
@@ -87,7 +91,7 @@ const renderer = SDL_CreateRenderer(
   window,
   // DirectX 11 On Windows
   (process.platform == 'win32' && SDL_GetNumRenderDrivers() > 1) ? 1 : -1,
-  SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
+  SDL_RENDERER_ACCELERATED | (true ? SDL_RENDERER_PRESENTVSYNC : 0)
 );
 if (renderer == null)
   fatal();
@@ -99,8 +103,15 @@ SDL_LoadWAV('d:/music/hatebit - track3.wav', wavSpec.ref(), wavBuffer, wavLength
 const deviceId = SDL_OpenAudioDevice(null, 0, wavSpec.ref(), null, 0);
 const success = SDL_QueueAudio(deviceId, wavBuffer.deref(), wavLength);
 SDL_PauseAudioDevice(deviceId, 0);*/
+const music_path = 'D:/Music/Master Boot Record - XCOPY.EXE.mp3';
+var music;
+if (fs.existsSync(music_path)) {
+  Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 320);
+  music = Mix_LoadMUS(music_path);
+  Mix_PlayMusic(music, 1);
+}
 
-const bg_path = 'd:/other/win7.png';
+const bg_path = 'D:/other/win7.png';
 const font_path = 'C:/Windows/Fonts/segoeuib.ttf';
 const bg = fs.existsSync(bg_path) ? IMG_Load(bg_path) : null;
 const font = fs.existsSync(font_path) ? TTF_OpenFont(font_path, 32) : null;
@@ -128,6 +139,9 @@ function tick() {
         SDL_FreeSurface(bg);
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
+        if (music)
+          Mix_FreeMusic(music);
+        Mix_Quit();
         if (font)
           TTF_CloseFont(font);
         TTF_Quit();
