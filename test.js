@@ -92,6 +92,14 @@ const renderer = SDL_CreateRenderer(
 if (renderer == null)
   fatal();
 
+/*const wavSpec = new SDL_AudioSpec;
+const wavLength = new Uint32Array(1);
+const wavBuffer = ref.ref(new Uint8Array(19574784));
+SDL_LoadWAV('d:/music/hatebit - track3.wav', wavSpec.ref(), wavBuffer, wavLength);
+const deviceId = SDL_OpenAudioDevice(null, 0, wavSpec.ref(), null, 0);
+const success = SDL_QueueAudio(deviceId, wavBuffer.deref(), wavLength);
+SDL_PauseAudioDevice(deviceId, 0);*/
+
 const bg_path = 'd:/other/win7.png';
 const font_path = 'C:/Windows/Fonts/segoeuib.ttf';
 const bg = fs.existsSync(bg_path) ? IMG_Load(bg_path) : null;
@@ -108,14 +116,6 @@ var speed_x = 250 * (Math.random() + 0.5);
 var speed_y = 250 * (Math.random() + 0.5);
 var is_colliding = false;
 var last_tick = SDL_GetTicks64();
-
-/*const wavSpec = new SDL_AudioSpec;
-const wavLength = new Uint32Array(1);
-const wavBuffer = ref.ref(new Uint8Array(19574784));
-SDL_LoadWAV('d:/music/hatebit - track3.wav', wavSpec.ref(), wavBuffer, wavLength);
-const deviceId = SDL_OpenAudioDevice(null, 0, wavSpec.ref(), null, 0);
-const success = SDL_QueueAudio(deviceId, wavBuffer.deref(), wavLength);
-SDL_PauseAudioDevice(deviceId, 0);*/
 
 log('Allocations:', SDL_GetNumAllocations());
 
