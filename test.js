@@ -199,14 +199,23 @@ function tick() {
     const text_surface = TTF_RenderText_Blended(
       font,
       'FPS: ' + Math.round(1 / delta).toString(),
-      new SDL_Color({r: 0, g: 255, b: 255})
+      new SDL_Color({
+        r: 0,
+        g: 255,
+        b: 255
+      })
     );
     const text_texture = SDL_CreateTextureFromSurface(renderer, text_surface);
     SDL_RenderCopy(
       renderer,
       text_texture,
       null,
-      new SDL_Rect({x: 0, y: 0, w: text_surface.deref().w, h: text_surface.deref().h}).ref()
+      new SDL_Rect({
+        x: 0,
+        y: 0,
+        w: text_surface.deref().w,
+        h: text_surface.deref().h
+      }).ref()
     );
     SDL_DestroyTexture(text_texture);
     SDL_FreeSurface(text_surface);
