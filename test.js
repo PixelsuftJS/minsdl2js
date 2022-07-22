@@ -22,7 +22,16 @@ function random_color() {
 
 sdl2.load_sdl2_library(
   (process.platform == 'win32' ? '' : 'lib') + 'SDL2',
-  // TODO
+  // Don't load new functions (Ubuntu 22.04 capability)
+  'SDL_ClearComposition',
+  'SDL_IsTextInputShown',
+  'SDL_HasIntersectionF',
+  'SDL_IntersectFRect',
+  'SDL_UnionFRect',
+  'SDL_EncloseFPoints',
+  'SDL_IntersectFRectAndLine',
+  'SDL_GetTouchName',
+  'SDL_RenderGetWindow'
 );
 sdl2.export_sdl2_library(global);
 if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS))
