@@ -11,5 +11,5 @@ See [`test.js`](https://github.com/Pixelsuft/minsdl2js/blob/main/test.js)
 - Arrays (?) <br />
 - OpenGL <br />
 - Joystick/Controller Functions <br />
-- SDL2_net, SDL2_ttf, SDL2_mixer, SDL2_gfx <br />
+- SDL2_net, SDL2_mixer, SDL2_gfx <br />
 - Fix Bugs if Exist

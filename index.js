@@ -61,4 +61,16 @@ exports.export_sdl2_image_library = function(export_obj) {
   });
   return export_obj;
 }
+
+exports.load_sdl2_ttf_library = function(library_path, ...ignore_list) {
+  api.ttf_library = api.ffi.Library(library_path, api.clear_ignore(require('./ttf').library_exports, ignore_list));
+  return api.ttf_library;
+}
+exports.export_sdl2_ttf_library = function(export_obj) {
+  Object.entries(require('./ttf').library_exports).forEach(([key, value]) => {
+    eval('export_obj.' + key + ' = api.ttf_library.' + key);
+  });
+  return export_obj;
+}
+
 exports.sdl2 = api;

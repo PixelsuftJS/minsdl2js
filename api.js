@@ -12,6 +12,7 @@ exports.e = e;
 exports.l = {};
 exports.library = {};
 exports.image_library = {};
+exports.ttf_library = {};
 exports.ffi = ffi;
 exports.ref = ref;
 exports.Struct = Struct;
@@ -51,13 +52,13 @@ exports.from_utf16 = function(str, terminator=exports.default_terminator) {
   return arr;
 }
 exports.to_utf16 = function(arr, terminator=exports.default_terminator) {
-  return e.trim_terminator(String.fromCharCode(...arr), terminator);
+  return exports.trim_terminator(String.fromCharCode(...arr), terminator);
 }
 exports.from_utf8 = function(str, terminator=exports.default_terminator) {
   return encoder.encode(str + terminator);
 }
 exports.to_utf8 = function(arr, terminator=exports.default_terminator) {
-  return e.trim_terminator(decoder.decode(arr), terminator);
+  return exports.trim_terminator(decoder.decode(arr), terminator);
 }
 exports.trim_terminator = function(str, terminator=exports.default_terminator) {
   const terminator_index = str.indexOf(terminator);

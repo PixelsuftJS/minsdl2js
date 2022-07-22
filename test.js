@@ -35,11 +35,15 @@ sdl2.load_sdl2_library(
   'SDL_RenderGetWindow'
 );
 sdl2.load_sdl2_image_library((process.platform == 'win32' ? '' : 'lib') + 'SDL2_image');
+sdl2.load_sdl2_ttf_library((process.platform == 'win32' ? '' : 'lib') + 'SDL2_ttf');
 sdl2.export_sdl2_library(global);
 sdl2.export_sdl2_image_library(global);
+sdl2.export_sdl2_ttf_library(global);
 if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS))
   fatal();
 if (!IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG))
+  fatal();
+if (TTF_Init())
   fatal();
 log(`CPU: ${SDL_GetCPUCount()} CPUs, RAM: ${SDL_GetSystemRAM()}MB`);
 log('Platform:', SDL_GetPlatform());
@@ -88,7 +92,9 @@ if (renderer == null)
   fatal();
 
 const bg_path = 'd:/other/win7.png';
+const font_path = 'C:/Windows/Fonts/segoeuib.ttf';
 const bg = fs.existsSync(bg_path) ? IMG_Load(bg_path) : null;
+const font = fs.existsSync(font_path) ? TTF_OpenFont(font_path, 32) : null;
 var text = '';
 var cube_rect = new SDL_FRect({
   x: 0,
@@ -112,6 +118,9 @@ function tick() {
         SDL_FreeSurface(bg);
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
+        if (font)
+          TTF_CloseFont(font);
+        TTF_Quit();
         IMG_Quit();
         SDL_Quit();
         log('Allocations:', SDL_GetNumAllocations());
@@ -178,13 +187,31 @@ function tick() {
     const bg_texture = SDL_CreateTextureFromSurface(renderer, bg);
     SDL_RenderCopy(renderer, bg_texture, null, null);
     SDL_DestroyTexture(bg_texture);
-  }
-  else {
+  } else {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
     SDL_RenderClear(renderer);
   }
+
   SDL_SetRenderDrawColor(renderer, 255, 0, 0, 0);
   SDL_RenderFillRectF(renderer, cube_rect.ref());
+
+  if (font) {
+    const text_surface = TTF_RenderText_Blended(
+      font,
+      'FPS: ' + Math.round(1 / delta).toString(),
+      new SDL_Color({r: 0, g: 255, b: 255})
+    );
+    const text_texture = SDL_CreateTextureFromSurface(renderer, text_surface);
+    SDL_RenderCopy(
+      renderer,
+      text_texture,
+      null,
+      new SDL_Rect({x: 0, y: 0, w: text_surface.deref().w, h: text_surface.deref().h}).ref()
+    );
+    SDL_DestroyTexture(text_texture);
+    SDL_FreeSurface(text_surface);
+  }
+
   SDL_RenderPresent(renderer);
   setImmediate(tick);
 }
