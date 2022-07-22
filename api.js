@@ -21,7 +21,7 @@ exports.ignore_list = [];
 exports.join_exports = function() {
   var result = Object.assign({}, ...exports.library_exports);
   for (var i = 0; i < exports.ignore_list.length; i++) {
-    delete result[exports.ignore_list];
+    delete result[exports.ignore_list[i]];
   }
   return result;
 }

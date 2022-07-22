@@ -20,7 +20,10 @@ function random_color() {
     Math.floor(Math.random() * 255);
 }
 
-sdl2.load_sdl2_library('SDL2.dll', ignore_list=[]);
+sdl2.load_sdl2_library(
+  (process.platform == 'win32' ? '' : 'lib') + 'SDL2',
+  // TODO
+);
 sdl2.export_sdl2_library(global);
 if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS))
   fatal();
