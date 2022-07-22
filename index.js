@@ -50,4 +50,15 @@ exports.export_sdl2_library = function(export_obj) {
   });
   return export_obj;
 }
+
+exports.load_sdl2_image_library = function(library_path, ...ignore_list) {
+  api.image_library = api.ffi.Library(library_path, api.clear_ignore(require('./image').library_exports, ignore_list));
+  return api.image_library;
+}
+exports.export_sdl2_image_library = function(export_obj) {
+  Object.entries(require('./image').library_exports).forEach(([key, value]) => {
+    eval('export_obj.' + key + ' = api.image_library.' + key);
+  });
+  return export_obj;
+}
 exports.sdl2 = api;

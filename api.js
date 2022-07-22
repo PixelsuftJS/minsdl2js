@@ -11,6 +11,7 @@ var enerator;
 exports.e = e;
 exports.l = {};
 exports.library = {};
+exports.image_library = {};
 exports.ffi = ffi;
 exports.ref = ref;
 exports.Struct = Struct;
@@ -18,12 +19,14 @@ exports.Union = Union;
 exports.library_exports = library_exports;
 exports.library_functions = library_functions;
 exports.ignore_list = [];
-exports.join_exports = function() {
-  var result = Object.assign({}, ...exports.library_exports);
-  for (var i = 0; i < exports.ignore_list.length; i++) {
-    delete result[exports.ignore_list[i]];
+exports.clear_ignore = function(dict, ignore_list) {
+  for (var i = 0; i < ignore_list.length; i++) {
+    delete dict[ignore_list[i]];
   }
-  return result;
+  return dict;
+}
+exports.join_exports = function() {
+  return exports.clear_ignore(Object.assign({}, ...exports.library_exports), exports.ignore_list);
 }
 exports.join_functions = function() {
   return Object.assign({}, ...exports.library_functions);

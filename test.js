@@ -1,4 +1,5 @@
 process.env.sdl2_global_export = 'true';
+const fs = require('fs');
 const sdl2 = require('./index');
 
 function fatal() {
@@ -33,8 +34,12 @@ sdl2.load_sdl2_library(
   'SDL_GetTouchName',
   'SDL_RenderGetWindow'
 );
+sdl2.load_sdl2_image_library((process.platform == 'win32' ? '' : 'lib') + 'SDL2_image');
 sdl2.export_sdl2_library(global);
+sdl2.export_sdl2_image_library(global);
 if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS))
+  fatal();
+if (!IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG))
   fatal();
 log(`CPU: ${SDL_GetCPUCount()} CPUs, RAM: ${SDL_GetSystemRAM()}MB`);
 log('Platform:', SDL_GetPlatform());
@@ -81,8 +86,9 @@ const renderer = SDL_CreateRenderer(
 );
 if (renderer == null)
   fatal();
-log('Allocations:', SDL_GetNumAllocations());
 
+const bg_path = 'd:/other/win7.png';
+const bg = fs.existsSync(bg_path) ? IMG_Load(bg_path) : null;
 var text = '';
 var cube_rect = new SDL_FRect({
   x: 0,
@@ -95,6 +101,7 @@ var speed_x = 250 * (Math.random() + 0.5);
 var speed_y = 250 * (Math.random() + 0.5);
 var is_colliding = false;
 var last_tick = SDL_GetTicks64();
+log('Allocations:', SDL_GetNumAllocations());
 
 // Do NOT create while(true) {...} - it will leak memory
 function tick() {
@@ -102,8 +109,10 @@ function tick() {
   while (SDL_PollEvent(event.ref())) {
     switch (event.type) {
       case SDL_QUIT:
+        SDL_FreeSurface(bg);
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
+        IMG_Quit();
         SDL_Quit();
         log('Allocations:', SDL_GetNumAllocations());
         return;
@@ -165,8 +174,15 @@ function tick() {
   } else if (is_colliding)
     is_colliding = false;
 
-  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-  SDL_RenderClear(renderer);
+  if (bg) {
+    const bg_texture = SDL_CreateTextureFromSurface(renderer, bg);
+    SDL_RenderCopy(renderer, bg_texture, null, null);
+    SDL_DestroyTexture(bg_texture);
+  }
+  else {
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+    SDL_RenderClear(renderer);
+  }
   SDL_SetRenderDrawColor(renderer, 255, 0, 0, 0);
   SDL_RenderFillRectF(renderer, cube_rect.ref());
   SDL_RenderPresent(renderer);
