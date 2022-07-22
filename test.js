@@ -1,6 +1,7 @@
 process.env.sdl2_global_export = 'true';
 const fs = require('fs');
 const sdl2 = require('./index');
+const ref = require('ref-napi');
 
 function fatal() {
   console.log('Error:', SDL_GetError());
@@ -39,7 +40,7 @@ sdl2.load_sdl2_ttf_library((process.platform == 'win32' ? '' : 'lib') + 'SDL2_tt
 sdl2.export_sdl2_library(global);
 sdl2.export_sdl2_image_library(global);
 sdl2.export_sdl2_ttf_library(global);
-if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS))
+if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_AUDIO))
   fatal();
 if (!IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG))
   fatal();
@@ -107,6 +108,15 @@ var speed_x = 250 * (Math.random() + 0.5);
 var speed_y = 250 * (Math.random() + 0.5);
 var is_colliding = false;
 var last_tick = SDL_GetTicks64();
+
+/*const wavSpec = new SDL_AudioSpec;
+const wavLength = new Uint32Array(1);
+const wavBuffer = ref.ref(new Uint8Array(19574784));
+SDL_LoadWAV('d:/music/hatebit - track3.wav', wavSpec.ref(), wavBuffer, wavLength);
+const deviceId = SDL_OpenAudioDevice(null, 0, wavSpec.ref(), null, 0);
+const success = SDL_QueueAudio(deviceId, wavBuffer.deref(), wavLength);
+SDL_PauseAudioDevice(deviceId, 0);*/
+
 log('Allocations:', SDL_GetNumAllocations());
 
 // Do NOT create while(true) {...} - it will leak memory
