@@ -22,7 +22,7 @@ function random_color() {
 
 sdl2.load_sdl2_library(
   (process.platform == 'win32' ? '' : 'lib') + 'SDL2',
-  // Don't load new functions (Ubuntu 22.04 capability)
+  // Don't load new functions (Ubuntu 22.04)
   'SDL_ClearComposition',
   'SDL_IsTextInputShown',
   'SDL_HasIntersectionF',
