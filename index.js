@@ -84,4 +84,21 @@ exports.export_sdl2_mixer_library = function(export_obj) {
   return export_obj;
 }
 
+exports.load_sdl2_net_library = function(library_path, ...ignore_list) {
+  api.net_library = api.ffi.Library(library_path, api.clear_ignore(require('./net').library_exports, ignore_list));
+  Object.entries(require('./net').library_functions).forEach(([key, value]) => {
+    eval('api.net_library.' + key + ' = value');
+  });
+  return api.net_library;
+}
+exports.export_sdl2_net_library = function(export_obj) {
+  Object.entries(require('./net').library_exports).forEach(([key, value]) => {
+    eval('export_obj.' + key + ' = api.net_library.' + key);
+  });
+  Object.entries(require('./net').library_functions).forEach(([key, value]) => {
+    eval('export_obj.' + key + ' = value');
+  });
+  return export_obj;
+}
+
 exports.sdl2 = api;

@@ -14,6 +14,7 @@ exports.library = {};
 exports.image_library = {};
 exports.ttf_library = {};
 exports.mixer_library = {};
+exports.net_library = {};
 exports.ffi = ffi;
 exports.ref = ref;
 exports.Struct = Struct;
