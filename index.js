@@ -101,4 +101,15 @@ exports.export_sdl2_net_library = function(export_obj) {
   return export_obj;
 }
 
+exports.load_sdl2_gfx_library = function(library_path, ...ignore_list) {
+  api.gfx_library = api.ffi.Library(library_path, api.clear_ignore(require('./gfx').library_exports, ignore_list));
+  return api.gfx_library;
+}
+exports.export_sdl2_gfx_library = function(export_obj) {
+  Object.entries(require('./gfx').library_exports).forEach(([key, value]) => {
+    eval('export_obj.' + key + ' = api.gfx_library.' + key);
+  });
+  return export_obj;
+}
+
 exports.sdl2 = api;

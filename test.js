@@ -39,11 +39,13 @@ sdl2.load_sdl2_image_library((process.platform == 'win32' ? '' : 'lib') + 'SDL2_
 sdl2.load_sdl2_ttf_library((process.platform == 'win32' ? '' : 'lib') + 'SDL2_ttf');
 sdl2.load_sdl2_mixer_library((process.platform == 'win32' ? '' : 'lib') + 'SDL2_mixer');
 sdl2.load_sdl2_net_library((process.platform == 'win32' ? '' : 'lib') + 'SDL2_net');
+sdl2.load_sdl2_gfx_library((process.platform == 'win32' ? '' : 'lib') + 'SDL2_gfx');
 sdl2.export_sdl2_library(global);
 sdl2.export_sdl2_image_library(global);
 sdl2.export_sdl2_ttf_library(global);
 sdl2.export_sdl2_mixer_library(global);
 sdl2.export_sdl2_net_library(global);
+sdl2.export_sdl2_gfx_library(global);
 if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_AUDIO))
   fatal();
 if (!IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG))
@@ -221,7 +223,9 @@ function tick() {
     SDL_RenderClear(renderer);
   }
 
-  SDL_SetRenderDrawColor(renderer, 255, 0, 0, 0);
+  filledCircleRGBA(renderer, w >> 1, h >> 1, (w + h) >> 3, 255, 255, 255, 50);
+
+  SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
   SDL_RenderFillRectF(renderer, cube_rect.ref());
 
   if (font) {
