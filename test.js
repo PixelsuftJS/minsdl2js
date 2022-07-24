@@ -1,7 +1,8 @@
 process.env.sdl2_global_export = 'true';
 const fs = require('fs');
-const sdl2 = require('./index');
 const ref = require('ref-napi');
+// Use require('minsdl2js') for your project
+const sdl2 = require('./index');
 
 function fatal() {
   console.log('Error:', SDL_GetError());
