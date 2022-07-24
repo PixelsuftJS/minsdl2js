@@ -220,7 +220,7 @@ function tick() {
     SDL_RenderCopy(renderer, bg_texture, null, null);
     SDL_DestroyTexture(bg_texture);
   } else {
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
   }
 
