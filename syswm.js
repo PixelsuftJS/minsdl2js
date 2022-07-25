@@ -30,7 +30,13 @@ e.SDL_SYSWM_KMSDRM = en();
 e.SDL_SYSWM_RISCOS = en();
 
 e.SDL_SysWMmsg = Struct({
-  version: 'void*', // TODO
+  version: e.SDL_version,
+  subsystem: 'int',
+  info: 'void*' // TODO
+});
+
+e.SDL_SysWMinfo = Struct({
+  version: e.SDL_version,
   subsystem: 'int',
   info: 'void*' // TODO
 });

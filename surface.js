@@ -34,7 +34,7 @@ e.SDL_Surface = Struct({
   locked: 'int',
   list_blitmap: 'void*',
   clip_rect: e.SDL_Rect,
-  map: 'void*', // TODO
+  map: 'void*',
   refcount: 'int'
 });
 
