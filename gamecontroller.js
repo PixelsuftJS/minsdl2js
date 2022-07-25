@@ -72,6 +72,62 @@ e.SDL_GameControllerButtonBind = Struct({
   })
 });
 
+e.SDL_GameControllerAddMappingsFromFile = function(file) {
+  return l.SDL_GameControllerAddMappingsFromRW(l.SDL_RWFromFile(file, "rb"), 1);
+}
+
 push_export({
-  // TODO: for better day
+  'SDL_GameControllerAddMappingsFromRW': ['int', ['void*', 'int']],
+  'SDL_GameControllerAddMapping': ['int', ['string']],
+  'SDL_GameControllerNumMappings': ['int', []],
+  'SDL_GameControllerMappingForIndex': ['string', ['int']],
+  'SDL_GameControllerMappingForGUID': ['string', [e.SDL_JoystickGUID]],
+  'SDL_GameControllerMapping': ['string', ['void*']],
+  'SDL_IsGameController': ['int', ['int']],
+  'SDL_GameControllerNameForIndex': ['string', ['int']],
+  'SDL_GameControllerTypeForIndex': ['int', ['int']],
+  'SDL_GameControllerMappingForDeviceIndex': ['string', ['int']],
+  'SDL_GameControllerOpen': ['void*', ['int']],
+  'SDL_GameControllerFromInstanceID': ['void*', ['int32']],
+  'SDL_GameControllerFromPlayerIndex': ['void*', ['int']],
+  'SDL_GameControllerName': ['string', ['void*']],
+  'SDL_GameControllerGetType': ['int', ['void*']],
+  'SDL_GameControllerGetPlayerIndex': ['int', ['void*']],
+  'SDL_GameControllerSetPlayerIndex': ['void', ['void*', 'int']],
+  'SDL_GameControllerGetVendor': ['Uint16', ['void*']],
+  'SDL_GameControllerGetProduct': ['Uint16', ['void*']],
+  'SDL_GameControllerGetProductVersion': ['Uint16', ['void*']],
+  'SDL_GameControllerGetSerial': ['string', ['void*']],
+  'SDL_GameControllerGetAttached': ['int', ['void*']],
+  'SDL_GameControllerGetJoystick': ['void*', ['void*']],
+  'SDL_GameControllerEventState': ['int', ['int']],
+  'SDL_GameControllerUpdate': ['void', []],
+  'SDL_GameControllerGetAxisFromString': ['int', ['string']],
+  'SDL_GameControllerGetStringForAxis': ['string', ['int']],
+  'SDL_GameControllerGetBindForAxis': [e.SDL_GameControllerButtonBind, ['void*', 'int']],
+  'SDL_GameControllerHasAxis': ['int', ['void*', 'int']],
+  'SDL_GameControllerGetAxis': ['int16', ['void*', 'int']],
+  'SDL_GameControllerGetButtonFromString': ['int', ['string']],
+  'SDL_GameControllerGetStringForButton': ['string', ['int']],
+  'SDL_GameControllerGetBindForButton': [e.SDL_GameControllerButtonBind, ['void*', 'int']],
+  'SDL_GameControllerHasButton': ['int', ['void*', 'int']],
+  'SDL_GameControllerGetButton': ['Uint8', ['void*', 'int']],
+  'SDL_GameControllerGetNumTouchpads': ['int', ['void*']],
+  'SDL_GameControllerGetNumTouchpadFingers': ['int', ['void*', 'int']],
+  'SDL_GameControllerGetTouchpadFinger': ['int', ['void*', 'int', 'int', 'Uint8', 'float*', 'float*', 'float*']],
+  'SDL_GameControllerHasSensor': ['int', ['void*', 'int']],
+  'SDL_GameControllerSetSensorEnabled': ['int', ['void*', 'int', 'int']],
+  'SDL_GameControllerIsSensorEnabled': ['int', ['void*', 'int']],
+  'SDL_GameControllerGetSensorDataRate': ['float', ['void*', 'int']],
+  'SDL_GameControllerGetSensorData': ['int', ['void*', 'int', 'float*', 'int']],
+  'SDL_GameControllerRumble': ['int', ['void*', 'Uint16', 'Uint16', 'Uint32']],
+  'SDL_GameControllerRumbleTriggers': ['int', ['void*', 'Uint16', 'Uint16', 'Uint32']],
+  'SDL_GameControllerHasLED': ['int', ['void*']],
+  'SDL_GameControllerHasRumble': ['int', ['void*']],
+  'SDL_GameControllerHasRumbleTriggers': ['int', ['void*']],
+  'SDL_GameControllerSetLED': ['int', ['void*', 'Uint8', 'Uint8', 'Uint8']],
+  'SDL_GameControllerSendEffect': ['int', ['void*', 'void*', 'int']],
+  'SDL_GameControllerClose': ['void', ['void*']],
+  'SDL_GameControllerGetAppleSFSymbolsNameForButton': ['string', ['void*', 'int']],
+  'SDL_GameControllerGetAppleSFSymbolsNameForAxis': ['string', ['void*', 'int']]
 });

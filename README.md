@@ -10,6 +10,6 @@ See [`test.js`](https://github.com/Pixelsuft/minsdl2js/blob/main/test.js)
 - Callbacks are void* <br />
 - Arrays (?) <br />
 - OpenGL <br />
-- Joystick/Controller and some others Functions <br />
+- Joystick and some others Functions <br />
 - SDL2_rtf maybe? <br />
 - Fix Bugs if Exist

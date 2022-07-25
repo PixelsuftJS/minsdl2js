@@ -45,7 +45,7 @@ e.SDL_HAT_RIGHTDOWN = e.SDL_HAT_RIGHT | e.SDL_HAT_DOWN;
 e.SDL_HAT_LEFTUP = e.SDL_HAT_LEFT | e.SDL_HAT_UP;
 e.SDL_HAT_LEFTDOWN = e.SDL_HAT_LEFT | e.SDL_HAT_DOWN;
 
-e.JoystickGUID = Struct({
+e.SDL_JoystickGUID = Struct({
   data: 'Uint8*'
 });
 
