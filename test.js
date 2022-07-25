@@ -23,19 +23,7 @@ function random_color() {
     Math.floor(Math.random() * 255);
 }
 
-sdl2.load_sdl2_library(
-  (process.platform == 'win32' ? '' : 'lib') + 'SDL2',
-  // Don't load new functions (Ubuntu 22.04)
-  'SDL_ClearComposition',
-  'SDL_IsTextInputShown',
-  'SDL_HasIntersectionF',
-  'SDL_IntersectFRect',
-  'SDL_UnionFRect',
-  'SDL_EncloseFPoints',
-  'SDL_IntersectFRectAndLine',
-  'SDL_GetTouchName',
-  'SDL_RenderGetWindow'
-);
+sdl2.load_sdl2_library((process.platform == 'win32' ? '' : 'lib') + 'SDL2');
 sdl2.load_sdl2_image_library((process.platform == 'win32' ? '' : 'lib') + 'SDL2_image');
 sdl2.load_sdl2_ttf_library((process.platform == 'win32' ? '' : 'lib') + 'SDL2_ttf');
 sdl2.load_sdl2_mixer_library((process.platform == 'win32' ? '' : 'lib') + 'SDL2_mixer');
