@@ -123,8 +123,7 @@ var mouse_point = new SDL_Point;
 var speed_x = 250 * (Math.random() + 0.5);
 var speed_y = 250 * (Math.random() + 0.5);
 var is_colliding = false;
-var fps_array = new Array(50).fill(0);
-var max_fps = 1;
+var delta_array = new Array(50).fill(0);
 var last_tick = SDL_GetTicks();
 
 log('Allocations:', SDL_GetNumAllocations());
@@ -222,12 +221,11 @@ function tick() {
   SDL_RenderFillRectF(renderer, cube_rect.ref());
 
   const fps = 1 / delta;
-  fps_array.shift();
-  fps_array.push(fps);
-  max_fps = Math.max(...fps_array, max_fps);
+  delta_array.shift();
+  delta_array.push(delta);
   SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-  for (var i = 0; i < fps_array.length; i++) {
-    SDL_RenderDrawPoint(renderer, i, 125 - fps_array[i] / max_fps * 25);
+  for (var i = 0; i < delta_array.length; i++) {
+    SDL_RenderDrawPoint(renderer, i, 125 - delta_array[i] * 125);
   }
 
   if (font) {
