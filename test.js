@@ -86,7 +86,9 @@ const renderer = SDL_CreateRenderer(
   window,
   // DirectX 11 On Windows
   (process.platform == 'win32' && SDL_GetNumRenderDrivers() > 1) ? 1 : -1,
-  SDL_RENDERER_ACCELERATED | (true ? SDL_RENDERER_PRESENTVSYNC : 0)
+  (process.argv.includes('--software') ? SDL_RENDERER_SOFTWARE : 0) |
+  (process.argv.includes('--no-accel') ? 0 : SDL_RENDERER_ACCELERATED) |
+  (process.argv.includes('--no-vsync') ? 0 : SDL_RENDERER_PRESENTVSYNC)
 );
 if (renderer == null)
   fatal();
@@ -121,7 +123,9 @@ var mouse_point = new SDL_Point;
 var speed_x = 250 * (Math.random() + 0.5);
 var speed_y = 250 * (Math.random() + 0.5);
 var is_colliding = false;
-var last_tick = SDL_GetTicks64();
+var fps_array = new Array(50).fill(0);
+var max_fps = 1;
+var last_tick = SDL_GetTicks();
 
 log('Allocations:', SDL_GetNumAllocations());
 
@@ -171,7 +175,7 @@ function tick() {
         break;
     }
   }
-  const now = SDL_GetTicks64();
+  const now = SDL_GetTicks();
   const delta = (now - last_tick) / 1000;
   last_tick = now;
 
@@ -217,10 +221,19 @@ function tick() {
   SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
   SDL_RenderFillRectF(renderer, cube_rect.ref());
 
+  const fps = 1 / delta;
+  fps_array.shift();
+  fps_array.push(fps);
+  max_fps = Math.max(...fps_array, max_fps);
+  SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+  for (var i = 0; i < fps_array.length; i++) {
+    SDL_RenderDrawPoint(renderer, i, 125 - fps_array[i] / max_fps * 25);
+  }
+
   if (font) {
     const text_surface = TTF_RenderText_Blended(
       font,
-      'FPS: ' + Math.round(1 / delta).toString(),
+      'FPS: ' + Math.round(fps).toString(),
       new SDL_Color({
         r: 0,
         g: 255,
