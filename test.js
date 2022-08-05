@@ -225,7 +225,8 @@ function tick() {
   delta_array.push(delta);
   SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
   for (var i = 0; i < delta_array.length; i++) {
-    SDL_RenderDrawPoint(renderer, i, 125 - delta_array[i] * 125);
+    // SDL_RenderDrawPoint(renderer, i, 125 - delta_array[i] * 125);
+    SDL_RenderDrawLine(renderer, i, 125 - delta_array[i] * 125, i + 1, 125);
   }
 
   if (font) {
