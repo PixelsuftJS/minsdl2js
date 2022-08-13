@@ -23,12 +23,18 @@ function random_color() {
     Math.floor(Math.random() * 255);
 }
 
-sdl2.load_sdl2_library((process.platform == 'win32' ? '' : 'lib') + 'SDL2');
-sdl2.load_sdl2_image_library((process.platform == 'win32' ? '' : 'lib') + 'SDL2_image');
-sdl2.load_sdl2_ttf_library((process.platform == 'win32' ? '' : 'lib') + 'SDL2_ttf');
-sdl2.load_sdl2_mixer_library((process.platform == 'win32' ? '' : 'lib') + 'SDL2_mixer');
-sdl2.load_sdl2_net_library((process.platform == 'win32' ? '' : 'lib') + 'SDL2_net');
-sdl2.load_sdl2_gfx_library((process.platform == 'win32' ? '' : 'lib') + 'SDL2_gfx');
+var prefix = process.platform == 'win32' ? '' : 'lib';
+var postfix = '';
+if (process.argv.includes('--cygwin')) {
+  prefix = 'cyg';
+  postfix = '-2-0-0';
+}
+sdl2.load_sdl2_library(prefix + 'SDL2' + postfix);
+sdl2.load_sdl2_image_library(prefix + 'SDL2_image' + postfix);
+sdl2.load_sdl2_ttf_library(prefix + 'SDL2_ttf' + postfix);
+sdl2.load_sdl2_mixer_library(prefix + 'SDL2_mixer' + postfix);
+sdl2.load_sdl2_net_library(prefix + 'SDL2_net' + postfix);
+sdl2.load_sdl2_gfx_library(prefix + 'SDL2_gfx' + postfix);
 sdl2.export_sdl2_library(global);
 sdl2.export_sdl2_image_library(global);
 sdl2.export_sdl2_ttf_library(global);
