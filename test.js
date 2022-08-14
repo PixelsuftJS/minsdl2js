@@ -261,9 +261,10 @@ function tick() {
     SDL_FreeSurface(text_surface);
   }
 
-  SDL_RenderPresent.async(renderer, (err, res) => {
-    // TODO: Does it work?
-    setImmediate(tick);
-  });
+  // TODO: Does it work?
+  SDL_RenderPresent.async(renderer, make_tick);
 }
-setImmediate(tick);
+function make_tick() {
+  setImmediate(tick);
+}
+make_tick();
