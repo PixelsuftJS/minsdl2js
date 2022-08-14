@@ -135,7 +135,7 @@ var last_tick = SDL_GetTicks();
 log('Allocations:', SDL_GetNumAllocations());
 
 // Do NOT create while(true) {...} - it will leak memory
-function tick() {
+async function tick() {
   var event = new SDL_Event;
   while (SDL_PollEvent(event.ref())) {
     switch (event.type) {
@@ -262,9 +262,6 @@ function tick() {
   }
 
   // TODO: Does it work?
-  SDL_RenderPresent.async(renderer, make_tick);
+  SDL_RenderPresent.async(renderer, tick);
 }
-function make_tick() {
-  setImmediate(tick);
-}
-make_tick();
+tick();
