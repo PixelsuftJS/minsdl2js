@@ -112,4 +112,15 @@ exports.export_sdl2_gfx_library = function(export_obj) {
   return export_obj;
 }
 
+exports.load_sdl2_sound_library = function(library_path, ...ignore_list) {
+  api.sound_library = api.ffi.Library(library_path, api.clear_ignore(require('./sound').library_exports, ignore_list));
+  return api.sound_library;
+}
+exports.export_sdl2_sound_library = function(export_obj) {
+  Object.entries(require('./sound').library_exports).forEach(([key, value]) => {
+    eval('export_obj.' + key + ' = api.sound_library.' + key);
+  });
+  return export_obj;
+}
+
 exports.sdl2 = api;

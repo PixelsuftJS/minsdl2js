@@ -35,12 +35,14 @@ sdl2.load_sdl2_ttf_library(prefix + 'SDL2_ttf' + postfix);
 sdl2.load_sdl2_mixer_library(prefix + 'SDL2_mixer' + postfix);
 sdl2.load_sdl2_net_library(prefix + 'SDL2_net' + postfix);
 sdl2.load_sdl2_gfx_library(prefix + 'SDL2_gfx' + postfix);
+sdl2.load_sdl2_sound_library(prefix + 'SDL2_sound' + postfix);
 sdl2.export_sdl2_library(global);
 sdl2.export_sdl2_image_library(global);
 sdl2.export_sdl2_ttf_library(global);
 sdl2.export_sdl2_mixer_library(global);
 sdl2.export_sdl2_net_library(global);
 sdl2.export_sdl2_gfx_library(global);
+sdl2.export_sdl2_sound_library(global);
 if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_AUDIO))
   fatal();
 if (!IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG))
@@ -50,6 +52,8 @@ if (TTF_Init())
 if (!Mix_Init(MIX_INIT_MP3 | MIX_INIT_OGG | MIX_INIT_MID | MIX_INIT_OPUS))
   fatal();
 if (SDLNet_Init())
+  fatal();
+if (!Sound_Init())
   fatal();
 log(`CPU: ${SDL_GetCPUCount()} CPUs, RAM: ${SDL_GetSystemRAM()}MB`);
 log('Platform:', SDL_GetPlatform());
@@ -143,6 +147,7 @@ async function tick() {
         SDL_FreeSurface(bg);
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
+        Sound_Quit();
         SDLNet_Quit();
         if (music)
           Mix_FreeMusic(music);
