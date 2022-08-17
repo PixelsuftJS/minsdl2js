@@ -115,12 +115,15 @@ var music;
 if (fs.existsSync(music_path)) {
   Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 320);
   music = Mix_LoadMUS(music_path);
-  Mix_PlayMusic(music, 1);
+  Mix_PlayMusic(music, -1);
 }
 
 const bg_path = 'D:/other/win7.png';
 const font_path = 'C:/Windows/Fonts/segoeuib.ttf';
 const bg = fs.existsSync(bg_path) ? IMG_Load(bg_path) : null;
+const bg_texture = bg ? SDL_CreateTextureFromSurface(renderer, bg) : null;
+if (bg)
+  SDL_FreeSurface(bg);
 const font = fs.existsSync(font_path) ? TTF_OpenFont(font_path, 32) : null;
 var text = '';
 var cube_rect = new SDL_FRect({
@@ -144,7 +147,8 @@ async function tick() {
   while (SDL_PollEvent(event.ref())) {
     switch (event.type) {
       case SDL_QUIT:
-        SDL_FreeSurface(bg);
+        if (bg_texture)
+          SDL_DestroyTexture(bg_texture);
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
         Sound_Quit();
@@ -217,10 +221,8 @@ async function tick() {
   } else if (is_colliding)
     is_colliding = false;
 
-  if (bg) {
-    const bg_texture = SDL_CreateTextureFromSurface(renderer, bg);
+  if (bg_texture) {
     SDL_RenderCopy(renderer, bg_texture, null, null);
-    SDL_DestroyTexture(bg_texture);
   } else {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
