@@ -153,8 +153,10 @@ async function tick() {
         SDL_DestroyWindow(window);
         Sound_Quit();
         SDLNet_Quit();
-        if (music)
+        if (music) {
           Mix_FreeMusic(music);
+          Mix_CloseAudio();
+        }
         Mix_Quit();
         if (font)
           TTF_CloseFont(font);
