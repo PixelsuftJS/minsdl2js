@@ -1,6 +1,6 @@
 {
   "name": "minsdl2js",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Pure SDL2 bindings for NodeJS using ffi-napi",
   "main": "index.js",
   "scripts": {
@@ -12,8 +12,14 @@
   },
   "keywords": [
     "sdl2",
-    "ffi",
-    "js"
+    "sdl2-mixer",
+    "sdl2-ttf",
+    "sdl2-image",
+    "sdl2-gfx",
+    "sdl2-net",
+    "sdl2-sound",
+    "node-ffi-napi",
+    "sdl2-wrapper"
   ],
   "author": "Pixelsuft",
   "license": "GPL-3.0-or-later",
