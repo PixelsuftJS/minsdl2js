@@ -53,6 +53,7 @@ if (process.argv.includes('--cygwin')) {
 sdl2.load_sdl2_library(prefix + 'SDL2' + postfix);
 sdl2.load_sdl2_image_library(prefix + 'SDL2_image' + postfix);
 sdl2.load_sdl2_ttf_library(prefix + 'SDL2_ttf' + postfix);
+// sdl2.load_sdl2_rtf_library(prefix + 'SDL2_rtf' + postfix);
 sdl2.load_sdl2_mixer_library(prefix + 'SDL2_mixer' + postfix);
 sdl2.load_sdl2_net_library(prefix + 'SDL2_net' + postfix);
 sdl2.load_sdl2_gfx_library(prefix + 'SDL2_gfx' + postfix);
@@ -60,6 +61,7 @@ sdl2.load_sdl2_sound_library(prefix + 'SDL2_sound' + postfix);
 sdl2.export_sdl2_library(global);
 sdl2.export_sdl2_image_library(global);
 sdl2.export_sdl2_ttf_library(global);
+// sdl2.export_sdl2_rtf_library(global);
 sdl2.export_sdl2_mixer_library(global);
 sdl2.export_sdl2_net_library(global);
 sdl2.export_sdl2_gfx_library(global);
@@ -102,7 +104,6 @@ const window = SDL_CreateWindow(
   h,
   SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_RESIZABLE
 );
-//if (icon = SDL_LoadBMP('d:/1.bmp')) {
 if (icon = SDL_CreateRGBSurface(0, 32, 32, 32, 0, 0, 0, 0)) {
   SDL_FillRect(icon, new SDL_Rect({
     x: 0,
@@ -188,7 +189,7 @@ async function tick() {
       case SDL_MOUSEMOTION:
         mouse_point.x = event.motion.x;
         mouse_point.y = event.motion.y;
-        //SDL_SetWindowTitle(window, `Mouse Pos: [${event.motion.x}x${event.motion.y}]`);
+        // SDL_SetWindowTitle(window, `Mouse Pos: [${event.motion.x}x${event.motion.y}]`);
         break;
       case SDL_KEYDOWN:
         if (event.key.keysym.sym == SDLK_BACKSPACE) {
@@ -260,7 +261,6 @@ async function tick() {
   delta_array.push(delta);
   SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
   for (var i = 0; i < delta_array.length; i++) {
-    // SDL_RenderDrawPoint(renderer, i, 125 - delta_array[i] * 125);
     SDL_RenderDrawLine(renderer, i, 125 - delta_array[i] * 125, i + 1, 125);
   }
 

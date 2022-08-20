@@ -122,4 +122,15 @@ exports.export_sdl2_sound_library = function(export_obj) {
   return export_obj;
 }
 
+exports.load_sdl2_rtf_library = function(library_path, ...ignore_list) {
+  api.rtf_library = api.ffi.Library(library_path, api.clear_ignore(require('./rtf').library_exports, ignore_list));
+  return api.rtf_library;
+}
+exports.export_sdl2_rtf_library = function(export_obj) {
+  Object.entries(require('./rtf').library_exports).forEach(([key, value]) => {
+    eval('export_obj.' + key + ' = api.rtf_library.' + key);
+  });
+  return export_obj;
+}
+
 exports.sdl2 = api;

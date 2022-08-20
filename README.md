@@ -9,5 +9,4 @@ See [`test.js`](https://github.com/Pixelsuft/minsdl2js/blob/main/test.js)
 ## TODO
 - Callbacks are void* <br />
 - OpenGL <br />
-- SDL2_rtf maybe? <br />
 - Fix Bugs if Exist
