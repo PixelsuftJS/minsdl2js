@@ -5,6 +5,7 @@ const {
   ref,
   Struct,
   Union,
+  ArrayType,
   from_hex,
   en,
   push_export,
@@ -20,7 +21,7 @@ e.SDL_RendererInfo = Struct({
   name: 'string',
   flags: 'Uint32',
   num_texture_formats: 'Uint32',
-  texture_formats: 'Uint32*',
+  texture_formats: ArrayType('Uint32', 16),
   max_texture_width: 'int',
   max_texture_height: 'int'
 });

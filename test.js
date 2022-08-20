@@ -23,6 +23,24 @@ function random_color() {
     Math.floor(Math.random() * 255);
 }
 
+function get_closest_renderer() {
+  var renderers = [];
+  for (var i = 0; i < SDL_GetNumRenderDrivers(); i++) {
+    const renderer_info = new SDL_RendererInfo;
+    SDL_GetRenderDriverInfo(i, renderer_info.ref());
+    renderers.push(renderer_info.name);
+  }
+  if ((renderer_index = renderers.indexOf('direct3d12')) >= 0)
+    return renderer_index;
+  if ((renderer_index = renderers.indexOf('direct3d11')) >= 0)
+    return renderer_index;
+  if ((renderer_index = renderers.indexOf('direct3d')) >= 0)
+    return renderer_index;
+  if ((renderer_index = renderers.indexOf('opengl')) >= 0)
+    return renderer_index;
+  return -1;
+}
+
 var prefix = process.platform == 'win32' ? '' : 'lib';
 var postfix = '';
 if (process.argv.includes('--cygwin')) {
@@ -95,7 +113,8 @@ if (icon = SDL_CreateRGBSurface(0, 32, 32, 32, 0, 0, 0, 0)) {
 const renderer = SDL_CreateRenderer(
   window,
   // DirectX 12 On Windows
-  (process.platform == 'win32' && SDL_GetNumRenderDrivers() > 2) ? 2 : -1,
+  // (process.platform == 'win32' && SDL_GetNumRenderDrivers() > 2) ? 2 : -1,
+  get_closest_renderer(),
   (process.argv.includes('--software') ? SDL_RENDERER_SOFTWARE : 0) |
   (process.argv.includes('--no-accel') ? 0 : SDL_RENDERER_ACCELERATED) |
   (process.argv.includes('--no-vsync') ? 0 : SDL_RENDERER_PRESENTVSYNC)

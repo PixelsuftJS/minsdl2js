@@ -2,6 +2,7 @@ const ffi = require('ffi-napi');
 const ref = require('ref-napi');
 const Struct = require('ref-struct-di')(ref);
 const Union = require('ref-union-di')(ref);
+const ArrayType = require('ref-array-di')(ref);
 
 var e = (typeof process.env.sdl2_global_export == 'undefined') ? exports : global;
 var library_exports = [];
@@ -20,6 +21,7 @@ exports.ffi = ffi;
 exports.ref = ref;
 exports.Struct = Struct;
 exports.Union = Union;
+exports.ArrayType = ArrayType;
 exports.library_exports = library_exports;
 exports.library_functions = library_functions;
 exports.ignore_list = [];
