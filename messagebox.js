@@ -5,6 +5,7 @@ const {
   ref,
   Struct,
   Union,
+  ArrayType,
   from_hex,
   en,
   push_export,
@@ -38,7 +39,7 @@ e.SDL_MessageBoxColor = Struct({
   b: 'Uint8'
 });
 e.SDL_MessageBoxColorScheme = Struct({
-  colors: ref.refType(e.SDL_MessageBoxColor)
+  colors: ArrayType(e.SDL_MessageBoxColor, SDL_MESSAGEBOX_COLOR_MAX)
 });
 e.SDL_MessageBoxData = Struct({
   flags: 'Uint32',
