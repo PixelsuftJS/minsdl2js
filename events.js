@@ -380,7 +380,7 @@ e.SDL_Event = Union({
 
 push_functions({
   'SDL_GetEventState': function(type) {
-    return l.SDL_EventState(type, SDL_QUERY);
+    return l.SDL_EventState(type, e.SDL_QUERY);
   }
 });
 
