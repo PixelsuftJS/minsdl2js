@@ -30,8 +30,11 @@ function get_closest_renderer() {
     SDL_GetRenderDriverInfo(i, renderer_info.ref());
     renderers.push(renderer_info.name);
   }
-  if ((renderer_index = renderers.indexOf('direct3d12')) >= 0)
+  if ((renderer_index = renderers.indexOf('direct3d12')) >= 0 && !process.argv.includes('--no-d3d12')) {
+    // TODO: remove when d3d12 will be fixed
+    SDL_SetWindowResizable(window, false);
     return renderer_index;
+  }
   if ((renderer_index = renderers.indexOf('direct3d11')) >= 0)
     return renderer_index;
   if ((renderer_index = renderers.indexOf('direct3d')) >= 0)

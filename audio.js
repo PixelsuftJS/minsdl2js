@@ -91,7 +91,7 @@ e.SDL_AudioCVT = Struct({
   len_cvt: 'int',
   len_mult: 'int',
   len_ratio: 'double',
-  filters: ArrayType('void*', SDL_AUDIOCVT_MAX_FILTERS + 1),
+  filters: ArrayType('void*', e.SDL_AUDIOCVT_MAX_FILTERS + 1),
   filter_index: 'int'
 });
 

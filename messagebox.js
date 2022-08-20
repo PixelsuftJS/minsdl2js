@@ -39,7 +39,7 @@ e.SDL_MessageBoxColor = Struct({
   b: 'Uint8'
 });
 e.SDL_MessageBoxColorScheme = Struct({
-  colors: ArrayType(e.SDL_MessageBoxColor, SDL_MESSAGEBOX_COLOR_MAX)
+  colors: ArrayType(e.SDL_MessageBoxColor, e.SDL_MESSAGEBOX_COLOR_MAX)
 });
 e.SDL_MessageBoxData = Struct({
   flags: 'Uint32',
