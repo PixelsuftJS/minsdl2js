@@ -5,6 +5,7 @@ const {
   ref,
   Struct,
   Union,
+  ArrayType,
   from_hex,
   en,
   push_export,
@@ -35,7 +36,7 @@ e.SDL_HAPTIC_INFINITY = 4294967295;
 
 e.SDL_HapticDirection = Struct({
   type: 'Uint8',
-  dir: 'int32*'
+  dir: ArrayType('int32', 3)
 });
 e.SDL_HapticConstant = Struct({
   type: 'Uint16',
@@ -73,12 +74,12 @@ e.SDL_HapticCondition = Struct({
   delay: 'Uint16',
   button: 'Uint16',
   interval: 'Uint16',
-  right_sat: 'Uint16*',
-  left_sat: 'Uint16*',
-  right_coeff: 'int16*',
-  left_coeff: 'int16*',
-  deadband: 'Uint16*',
-  center: 'int16*'
+  right_sat: ArrayType('Uint16', 3),
+  left_sat: ArrayType('Uint16', 3),
+  right_coeff: ArrayType('int16', 3),
+  left_coeff: ArrayType('int16', 3),
+  deadband: ArrayType('Uint16', 3),
+  center: ArrayType('int16', 3)
 });
 e.SDL_HapticRamp = Struct({
   type: 'Uint16',

@@ -5,6 +5,7 @@ const {
   ref,
   Struct,
   Union,
+  ArrayType,
   from_hex,
   en,
   push_export,
@@ -34,7 +35,7 @@ e.SDL_BYTEORDER = os.endianness() == 'LE' ? e.SDL_LIL_ENDIAN : e.SDL_BIG_ENDIAN;
 
 // SDL_guid.h
 e.SDL_GUID = Struct({
-  data: 'Uint8*'
+  data: ArrayType('Uint8', 16)
 });
 
 // SDL_locale.h

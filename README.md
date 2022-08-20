@@ -8,7 +8,6 @@ npm i minsdl2js
 See [`test.js`](https://github.com/Pixelsuft/minsdl2js/blob/main/test.js)
 ## TODO
 - Callbacks are void* <br />
-- Arrays (?) <br />
 - OpenGL <br />
 - SDL2_rtf maybe? <br />
 - Fix Bugs if Exist

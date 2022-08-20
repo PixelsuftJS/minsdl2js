@@ -6,7 +6,6 @@ require('./atomic');
 require('./audio');
 require('./assert');
 require('./blendmode');
-// require('./egl');
 require('./error');
 require('./keyboard');
 require('./events');

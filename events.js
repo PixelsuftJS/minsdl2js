@@ -5,6 +5,7 @@ const {
   ref,
   Struct,
   Union,
+  ArrayType,
   from_hex,
   en,
   push_export,
@@ -122,7 +123,7 @@ e.SDL_TextEditingEvent = Struct({
   type: 'Uint32',
   timestamp: 'Uint32',
   windowID: 'Uint32',
-  text: 'string', // Right ?
+  text: ArrayType('char', e.SDL_TEXTEDITINGEVENT_TEXT_SIZE),
   start: 'int32',
   length: 'int32'
 });
@@ -138,7 +139,7 @@ e.SDL_TextInputEvent = Struct({
   type: 'Uint32',
   timestamp: 'Uint32',
   windowID: 'Uint32',
-  text: 'string' // Right ?
+  text: ArrayType('char', e.SDL_TEXTINPUTEVENT_TEXT_SIZE)
 });
 e.SDL_MouseMotionEvent = Struct({
   type: 'Uint32',
@@ -265,7 +266,7 @@ e.SDL_ControllerSensorEvent = Struct({
   timestamp: 'Uint32',
   which: 'int32',
   sensor: 'int32',
-  data: 'float*'
+  data: ArrayType('float', 3)
 });
 e.SDL_AudioDeviceEvent = Struct({
   type: 'Uint32',
@@ -374,7 +375,7 @@ e.SDL_Event = Union({
   mgesture: e.SDL_MultiGestureEvent,
   dgesture: e.SDL_DollarGestureEvent,
   drop: e.SDL_DropEvent,
-  padding: 'Uint8*'
+  padding: ArrayType('Uint8', ref.sizeof.pointer <= 8 ? 56 : ref.sizeof.pointer == 16 ? 64 : 3 * ref.sizeof.pointer)
 });
 
 push_functions({
