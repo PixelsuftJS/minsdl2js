@@ -10,7 +10,7 @@ const {
 } = require('./api');
 
 e.SDL_NET_MAJOR_VERSION = 2;
-e.SDL_NET_MINOR_VERSION = 1;
+e.SDL_NET_MINOR_VERSION = 2;
 e.SDL_NET_PATCHLEVEL = 0;
 
 e.SDL_NET_VERSION = function(X) {

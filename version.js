@@ -19,7 +19,7 @@ e.SDL_version = Struct({
 
 e.SDL_MAJOR_VERSION = 2;
 e.SDL_MINOR_VERSION = 0;
-e.SDL_PATCHLEVEL = 22;
+e.SDL_PATCHLEVEL = 24;
 
 e.SDL_VERSION = function(x) {
   x.major = e.SDL_MAJOR_VERSION;
