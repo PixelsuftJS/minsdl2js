@@ -129,5 +129,34 @@ e.SDL_HapticEffect = Struct({
 });
 
 push_export({
-  // TODO: blah blah blah
+  'SDL_NumHaptics': ['int', []],
+  'SDL_HapticName': ['string', ['int']],
+  'SDL_HapticOpen': ['void*', ['int']],
+  'SDL_HapticOpened': ['int', ['int']],
+  'SDL_HapticIndex': ['int', ['void*']],
+  'SDL_MouseIsHaptic': ['int', []],
+  'SDL_HapticOpenFromMouse': ['void*', []],
+  'SDL_JoystickIsHaptic': ['int', ['void*']],
+  'SDL_HapticOpenFromJoystick': ['void*', ['void*']],
+  'SDL_HapticClose': ['void', ['void*']],
+  'SDL_HapticNumEffects': ['int', ['void*']],
+  'SDL_HapticNumEffectsPlaying': ['int', ['void*']],
+  'SDL_HapticQuery': ['Uint', ['void*']],
+  'SDL_HapticNumAxes': ['int', ['void*']],
+  'SDL_HapticEffectSupported': ['int', ['void*', 'void*']],
+  'SDL_HapticNewEffect': ['int', ['void*', 'void*']],
+  'SDL_HapticUpdateEffect': ['int', ['void*', 'int', 'void*']],
+  'SDL_HapticRunEffect': ['int', ['void*', 'int', 'Uint32']],
+  'SDL_HapticStopEffect': ['int', ['void*', 'int']],
+  'SDL_HapticDestroyEffect': ['void', ['void*', 'int']],
+  'SDL_HapticGetEffectStatus': ['int', ['void*', 'int']],
+  'SDL_HapticSetGain': ['int', ['void*', 'int']],
+  'SDL_HapticSetAutocenter': ['int', ['void*', 'int']],
+  'SDL_HapticPause': ['int', ['void*']],
+  'SDL_HapticUnpause': ['int', ['void*']],
+  'SDL_HapticStopAll': ['int', ['void*']],
+  'SDL_HapticRumbleSupported': ['int', ['void*']],
+  'SDL_HapticRumbleInit': ['int', ['void*']],
+  'SDL_HapticRumblePlay': ['int', ['void*', 'float', 'Uint32']],
+  'SDL_HapticRumbleStop': ['int', ['void*']]
 });

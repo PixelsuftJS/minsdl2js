@@ -47,5 +47,5 @@ push_export({
   'SDL_AtomicAdd': ['void', ['void*', 'int']],
   'SDL_AtomicCASPtr': ['int', ['void**', 'void*', 'void*']],
   'SDL_AtomicSetPtr': ['void*', ['void**', 'void*']],
-  'SDL_AtomicGetPtr': ['void*', ['void**']],
+  'SDL_AtomicGetPtr': ['void*', ['void**']]
 });
