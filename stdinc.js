@@ -18,6 +18,8 @@ e.SDL_ICONV_E2BIG = -2;
 e.SDL_ICONV_EILSEQ = -3;
 e.SDL_ICONV_EINVAL = -4;
 
+e.SDL_SIZE_MAX = ref.sizeof.size_t - 1;
+
 push_functions({
   'SDL_stack_alloc': function(type_size, count) {
     return l.SDL_malloc(type_size * count);
@@ -44,6 +46,20 @@ push_functions({
   },
   'SDL_iconv_wchar_utf8': function(S) {
     return l.SDL_iconv_string("UTF-8", "WCHAR_T", S, (l.SDL_strlen(S) + 1) * 2);
+  },
+  'SDL_size_mul_overflow': function(a, b, ret) {
+    if (a != 0 && b > e.SDL_SIZE_MAX / a) {
+      return -1;
+    }
+    ret[0] = a * b;
+    return 0;
+  },
+  'SDL_size_add_overflow': function(a, b, ret) {
+    if (b > e.SDL_SIZE_MAX - a) {
+      return -1;
+    }
+    ret[0] = a + b;
+    return 0;
   }
 });
 
@@ -52,12 +68,14 @@ push_export({
   'SDL_calloc': ['void*', ['size_t', 'size_t']],
   'SDL_realloc': ['void*', ['void*', 'size_t']],
   'SDL_free': ['void', ['void*']],
+  'SDL_GetOriginalMemoryFunctions': ['void', ['void*', 'void*', 'void*', 'void*']],
   'SDL_GetMemoryFunctions': ['void', ['void**', 'void**', 'void**', 'void*']],
   'SDL_SetMemoryFunctions': ['int', ['void*', 'void*', 'void*', 'void']],
   'SDL_GetNumAllocations': ['int', []],
   'SDL_getenv': ['string', ['string']],
   'SDL_setenv': ['int', ['string', 'string', 'int']],
   'SDL_qsort': ['void', ['void*', 'size_t', 'size_t', 'int*']],
+  'SDL_bsearch': ['void', ['void*', 'void*', 'size_t', 'int*']],
   'SDL_isalpha': ['int', ['int']],
   'SDL_isalnum': ['int', ['int']],
   'SDL_isblank': ['int', ['int']],
@@ -72,6 +90,7 @@ push_export({
   'SDL_isgraph': ['int', ['int']],
   'SDL_toupper': ['int', ['int']],
   'SDL_tolower': ['int', ['int']],
+  'SDL_crc16': ['Uint16', ['Uint32', 'void*', 'size_t']],
   'SDL_crc32': ['Uint32', ['Uint32', 'void*', 'size_t']],
   'SDL_memset': ['void*', ['void*', 'int', 'size_t']],
   'SDL_memcpy': ['void*', ['void*', 'void*', 'size_t']],
@@ -99,6 +118,7 @@ push_export({
   'SDL_strstr': ['string', ['string', 'string']],
   'SDL_strtokr': ['string', ['string', 'string', 'char**']],
   'SDL_utf8strlen': ['size_t', ['string']],
+  'SDL_utf8strnlen': ['size_t', ['string', 'size_t']],
   'SDL_itoa': ['string', ['int', 'string', 'int']],
   'SDL_uitoa': ['string', ['Uint', 'string', 'int']],
   'SDL_ltoa': ['string', ['long', 'string', 'int']],

@@ -32,6 +32,11 @@ e.SDL_LIL_ENDIAN = 1234;
 e.SDL_BIG_ENDIAN = 4321;
 e.SDL_BYTEORDER = os.endianness() == 'LE' ? e.SDL_LIL_ENDIAN : e.SDL_BIG_ENDIAN;
 
+// SDL_guid.h
+e.SDL_GUID = Struct({
+  data: 'Uint8*'
+});
+
 // SDL_locale.h
 e.SDL_Locale = Struct({
   language: 'string',
@@ -46,7 +51,7 @@ e.SDL_POWERSTATE_CHARGING = en();
 e.SDL_POWERSTATE_CHARGED = en();
 
 // SDL_revision.h
-e.SDL_REVISION = 'https://github.com/libsdl-org/SDL.git@53dea9830964eee8b5c2a7ee0a65d6e268dc78a1';
+e.SDL_REVISION = 'https://github.com/libsdl-org/SDL.git@8c9beb0c873f6ca5efbd88f1ad2648bfc793b2ac';
 e.SDL_REVISION_NUMBER = 0;
 
 // SDL_timer.h
@@ -96,6 +101,8 @@ push_export({
   'SDL_HasAVX512F': ['int', []],
   'SDL_HasARMSIMD': ['int', []],
   'SDL_HasNEON': ['int', []],
+  'SDL_HasLSX': ['int', []],
+  'SDL_HasLASX': ['int', []],
   'SDL_GetSystemRAM': ['int', []],
   'SDL_SIMDGetAlignment': ['size_t', []],
   'SDL_SIMDAlloc': ['void*', ['size_t']],
@@ -109,6 +116,9 @@ push_export({
   'SDL_SaveAllDollarTemplates': ['int', ['void**']],
   'SDL_SaveDollarTemplate': ['int', ['void*', 'void**']],
   'SDL_LoadDollarTemplates': ['int', ['void*', 'void**']],
+  // SDL_gui.h
+  'SDL_GUIDToString': ['void*', [e.SDL_GUID, 'string', 'int']],
+  'SDL_GUIDFromString': [e.SDL_GUID, ['string']],
   // SDL_loadso.h
   'SDL_LoadObject': ['void*', ['string']],
   'SDL_LoadFunction': ['void*', ['void*', 'string']],

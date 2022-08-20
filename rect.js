@@ -53,10 +53,10 @@ push_functions({
   },
   'SDL_FRectEqualsEpsilon': function(a, b, epsilon) {
     return (a && b && ((a == b) ||
-      ((l.SDL_fabs(a.x - b.x) <= epsilon) &&
-        (l.SDL_fabs(a.y - b.y) <= epsilon) &&
-        (l.SDL_fabs(a.w - b.w) <= epsilon) &&
-        (l.SDL_fabs(a.h - b.h) <= epsilon))));
+      ((l.SDL_fabsf(a.x - b.x) <= epsilon) &&
+        (l.SDL_fabsf(a.y - b.y) <= epsilon) &&
+        (l.SDL_fabsf(a.w - b.w) <= epsilon) &&
+        (l.SDL_fabsf(a.h - b.h) <= epsilon))));
   },
   'SDL_FRectEquals': function(a, b) {
     return l.SDL_FRectEqualsEpsilon(a, b, e.SDL_FLT_EPSILON);

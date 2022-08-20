@@ -45,8 +45,28 @@ e.SDL_HAT_RIGHTDOWN = e.SDL_HAT_RIGHT | e.SDL_HAT_DOWN;
 e.SDL_HAT_LEFTUP = e.SDL_HAT_LEFT | e.SDL_HAT_UP;
 e.SDL_HAT_LEFTDOWN = e.SDL_HAT_LEFT | e.SDL_HAT_DOWN;
 
-e.SDL_JoystickGUID = Struct({
-  data: 'Uint8*'
+e.SDL_VIRTUAL_JOYSTICK_DESC_VERSION = 1;
+
+e.SDL_JoystickGUID = e.SDL_GUID;
+e.SDL_VirtualJoystickDesc = Struct({
+  version: 'Uint16',
+  type: 'Uint16',
+  naxes: 'Uint16',
+  nbuttons: 'Uint16',
+  nhats: 'Uint16',
+  vendor_id: 'Uint16',
+  product_id: 'Uint16',
+  padding: 'Uint16',
+  button_mask: 'Uint32',
+  axis_mask: 'Uint32',
+  name: 'string',
+  userdata: 'void*',
+  Update: 'void*',
+  SetPlayerIndex: 'void*',
+  Rumble: 'int*',
+  RumbleTriggers: 'int*',
+  SetLED: 'int*',
+  SendEffect: 'int*'
 });
 
 push_export({
@@ -54,6 +74,7 @@ push_export({
   'SDL_UnlockJoysticks': ['void', []],
   'SDL_NumJoysticks': ['int', []],
   'SDL_JoystickNameForIndex': ['string', ['int']],
+  'SDL_JoystickPathForIndex': ['string', ['int']],
   'SDL_JoystickGetDevicePlayerIndex': ['int', ['int']],
   'SDL_JoystickGetDeviceGUID': [e.SDL_JoystickGUID, ['int']],
   'SDL_JoystickGetDeviceVendor': ['Uint16', ['int']],
@@ -65,17 +86,20 @@ push_export({
   'SDL_JoystickFromInstanceID': ['void*', ['int32']],
   'SDL_JoystickFromPlayerIndex': ['void*', ['int']],
   'SDL_JoystickAttachVirtual': ['int', ['int', 'int', 'int', 'int']],
+  'SDL_JoystickAttachVirtualEx': ['int', ['void*']],
   'SDL_JoystickIsVirtual': ['int', ['int']],
   'SDL_JoystickSetVirtualAxis': ['int', ['void*', 'int', 'int16']],
   'SDL_JoystickSetVirtualButton': ['int', ['void*', 'int', 'Uint8']],
   'SDL_JoystickSetVirtualHat': ['int', ['void*', 'int', 'Uint8']],
   'SDL_JoystickName': ['string', ['void*']],
+  'SDL_JoystickPath': ['string', ['void*']],
   'SDL_JoystickGetPlayerIndex': ['int', ['void*']],
   'SDL_JoystickSetPlayerIndex': ['int', ['void*', 'int']],
   'SDL_JoystickGetGUID': [e.SDL_JoystickGUID, ['void*']],
   'SDL_JoystickGetVendor': ['Uint16', ['void*']],
   'SDL_JoystickGetProduct': ['Uint16', ['void*']],
   'SDL_JoystickGetProductVersion': ['Uint16', ['void*']],
+  'SDL_JoystickGetFirmwareVersion': ['Uint16', ['void*']],
   'SDL_JoystickGetSerial': ['string', ['void*']],
   'SDL_JoystickGetType': ['int', ['void*']],
   'SDL_JoystickGetGUIDString': ['void', [e.SDL_JoystickGUID, 'string', 'int']],

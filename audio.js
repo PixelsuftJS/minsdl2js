@@ -112,6 +112,7 @@ push_export({
   'SDL_GetNumAudioDevices': ['int', ['int']],
   'SDL_GetAudioDeviceName': ['string', ['int', 'int']],
   'SDL_GetAudioDeviceSpec': ['int', ['int', 'int', 'void*']],
+  'SDL_GetDefaultAudioInfo': ['int', ['char**', 'void*', 'int']],
   'SDL_OpenAudioDevice': ['Uint32', ['string', 'int', 'void*', 'void*', 'int']],
   'SDL_GetAudioStatus': ['int', []],
   'SDL_GetAudioDeviceStatus': ['int', ['Uint32']],

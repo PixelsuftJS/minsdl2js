@@ -94,8 +94,8 @@ if (icon = SDL_CreateRGBSurface(0, 32, 32, 32, 0, 0, 0, 0)) {
 } else fatal();
 const renderer = SDL_CreateRenderer(
   window,
-  // DirectX 11 On Windows
-  (process.platform == 'win32' && SDL_GetNumRenderDrivers() > 1) ? 1 : -1,
+  // DirectX 12 On Windows
+  (process.platform == 'win32' && SDL_GetNumRenderDrivers() > 2) ? 2 : -1,
   (process.argv.includes('--software') ? SDL_RENDERER_SOFTWARE : 0) |
   (process.argv.includes('--no-accel') ? 0 : SDL_RENDERER_ACCELERATED) |
   (process.argv.includes('--no-vsync') ? 0 : SDL_RENDERER_PRESENTVSYNC)

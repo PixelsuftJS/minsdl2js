@@ -40,6 +40,7 @@ e.SDL_JOYBUTTONDOWN = en();
 e.SDL_JOYBUTTONUP = en();
 e.SDL_JOYDEVICEADDED = en();
 e.SDL_JOYDEVICEREMOVED = en();
+e.SDL_JOYBATTERYUPDATED = en();
 e.SDL_CONTROLLERAXISMOTION = en(0x650);
 e.SDL_CONTROLLERBUTTONDOWN = en();
 e.SDL_CONTROLLERBUTTONUP = en();
@@ -218,6 +219,12 @@ e.SDL_JoyDeviceEvent = Struct({
   timestamp: 'Uint32',
   which: 'int32'
 });
+e.SDL_JoyBatteryEvent = Struct({
+  type: 'Uint32',
+  timestamp: 'Uint32',
+  which: 'int32',
+  level: 'int'
+});
 e.SDL_ControllerAxisEvent = Struct({
   type: 'Uint32',
   timestamp: 'Uint32',
@@ -352,6 +359,7 @@ e.SDL_Event = Union({
   jhat: e.SDL_JoyHatEvent,
   jbutton: e.SDL_JoyButtonEvent,
   jdevice: e.SDL_JoyDeviceEvent,
+  jbattery: e.SDL_JoyBatteryEvent,
   caxis: e.SDL_ControllerAxisEvent,
   cbutton: e.SDL_ControllerButtonEvent,
   cdevice: e.SDL_ControllerDeviceEvent,

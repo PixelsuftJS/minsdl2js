@@ -21,6 +21,10 @@ e.SDL_CONTROLLER_TYPE_VIRTUAL = en();
 e.SDL_CONTROLLER_TYPE_PS5 = en();
 e.SDL_CONTROLLER_TYPE_AMAZON_LUNA = en();
 e.SDL_CONTROLLER_TYPE_GOOGLE_STADIA = en();
+e.SDL_CONTROLLER_TYPE_NVIDIA_SHIELD = en();
+e.SDL_CONTROLLER_TYPE_NINTENDO_SWITCH_JOYCON_LEFT = en();
+e.SDL_CONTROLLER_TYPE_NINTENDO_SWITCH_JOYCON_RIGHT = en();
+e.SDL_CONTROLLER_TYPE_NINTENDO_SWITCH_JOYCON_PAIR = en();
 
 e.SDL_CONTROLLER_BINDTYPE_NONE = en(0);
 e.SDL_CONTROLLER_BINDTYPE_BUTTON = en();
@@ -85,18 +89,21 @@ push_export({
   'SDL_GameControllerMapping': ['string', ['void*']],
   'SDL_IsGameController': ['int', ['int']],
   'SDL_GameControllerNameForIndex': ['string', ['int']],
+  'SDL_GameControllerPathForIndex': ['string', ['int']],
   'SDL_GameControllerTypeForIndex': ['int', ['int']],
   'SDL_GameControllerMappingForDeviceIndex': ['string', ['int']],
   'SDL_GameControllerOpen': ['void*', ['int']],
   'SDL_GameControllerFromInstanceID': ['void*', ['int32']],
   'SDL_GameControllerFromPlayerIndex': ['void*', ['int']],
   'SDL_GameControllerName': ['string', ['void*']],
+  'SDL_GameControllerPath': ['string', ['void*']],
   'SDL_GameControllerGetType': ['int', ['void*']],
   'SDL_GameControllerGetPlayerIndex': ['int', ['void*']],
   'SDL_GameControllerSetPlayerIndex': ['void', ['void*', 'int']],
   'SDL_GameControllerGetVendor': ['Uint16', ['void*']],
   'SDL_GameControllerGetProduct': ['Uint16', ['void*']],
   'SDL_GameControllerGetProductVersion': ['Uint16', ['void*']],
+  'SDL_GameControllerGetFirmwareVersion': ['Uint16', ['void*']],
   'SDL_GameControllerGetSerial': ['string', ['void*']],
   'SDL_GameControllerGetAttached': ['int', ['void*']],
   'SDL_GameControllerGetJoystick': ['void*', ['void*']],

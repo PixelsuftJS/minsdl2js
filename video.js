@@ -71,6 +71,7 @@ e.SDL_GL_FRAMEBUFFER_SRGB_CAPABLE = en();
 e.SDL_GL_CONTEXT_RELEASE_BEHAVIOR = en();
 e.SDL_GL_CONTEXT_RESET_NOTIFICATION = en();
 e.SDL_GL_CONTEXT_NO_ERROR = en();
+e.SDL_GL_FLOATBUFFERS = en();
 
 e.SDL_GL_CONTEXT_PROFILE_CORE = en(0x0001);
 e.SDL_GL_CONTEXT_PROFILE_COMPATIBILITY = en(0x0002);
@@ -149,6 +150,9 @@ push_export({
   'SDL_GetDisplayMode': ['int', ['int', 'int', 'void*']],
   'SDL_GetDesktopDisplayMode': ['int', ['int', 'void*']],
   'SDL_GetCurrentDisplayMode': ['int', ['int', 'void*']],
+  'SDL_GetClosestDisplayMode': ['int', ['int', 'void*', 'void*']],
+  'SDL_GetPointDisplayIndex': ['int', ['void*']],
+  'SDL_GetRectDisplayIndex': ['int', ['void*']],
   'SDL_GetWindowDisplayIndex': ['int', ['void*']],
   'SDL_SetWindowDisplayMode': ['int', ['void*', 'void*']],
   'SDL_GetWindowDisplayMode': ['int', ['void*', 'void*']],
