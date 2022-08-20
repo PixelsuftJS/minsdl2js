@@ -25,7 +25,7 @@ e.Sound_AudioInfo = Struct({
   rate: 'Uint32'
 });
 e.Sound_DecoderInfo = Struct({
-  extensions: 'char**',
+  extensions: ref.refType('string'),
   description: 'string',
   author: 'string',
   url: 'string'

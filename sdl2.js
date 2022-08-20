@@ -159,7 +159,7 @@ push_export({
   'SDL_Vulkan_LoadLibrary': ['int', ['string']],
   'SDL_Vulkan_GetVkGetInstanceProcAddr': ['void*', []],
   'SDL_Vulkan_UnloadLibrary': ['void', []],
-  'SDL_Vulkan_GetInstanceExtensions': ['int', ['void*', 'Uint', 'char**']],
+  'SDL_Vulkan_GetInstanceExtensions': ['int', ['void*', 'Uint', ref.refType('string')]],
   'SDL_Vulkan_CreateSurface': ['int', ['void*', 'void*', 'void**']],
   'SDL_Vulkan_GetDrawableSize': ['void', ['void*', 'int*', 'int*']],
 });
