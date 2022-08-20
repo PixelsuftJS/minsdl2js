@@ -1,13 +1,5 @@
 const {
-  e,
-  ffi,
-  ref,
-  Struct,
-  Union,
-  from_hex,
-  en,
-  push_export,
-  push_functions
+  e
 } = require('./api');
 
 e.EGL_ALPHA_SIZE = 0x3021;

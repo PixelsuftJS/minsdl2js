@@ -1,14 +1,7 @@
 const {
   e,
-  l,
-  ffi,
-  ref,
-  Struct,
-  Union,
-  from_hex,
   en,
-  push_export,
-  push_functions
+  push_export
 } = require('./api');
 
 e.SDL_THREAD_PRIORITY_LOW = en(0);

@@ -1,10 +1,5 @@
 const {
   e,
-  ffi,
-  ref,
-  Struct,
-  Union,
-  from_hex,
   en,
   push_export
 } = require('./api');

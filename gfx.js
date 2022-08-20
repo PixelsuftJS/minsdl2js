@@ -1,12 +1,7 @@
 const {
   e,
-  ffi,
   ref,
-  Struct,
-  Union,
-  from_hex,
-  en,
-  push_export
+  Struct
 } = require('./api');
 
 e.SDL2_GFXPRIMITIVES_MAJOR = 1;

@@ -1,10 +1,8 @@
 const {
   e,
   l,
-  ffi,
   ref,
   Struct,
-  Union,
   ArrayType,
   from_hex,
   en,

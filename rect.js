@@ -1,14 +1,9 @@
 const {
   e,
-  ffi,
-  ref,
+  l,
   Struct,
-  Union,
-  from_hex,
-  en,
   push_export,
-  push_functions,
-  l
+  push_functions
 } = require('./api');
 
 e.SDL_Point = Struct({

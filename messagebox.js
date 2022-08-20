@@ -1,15 +1,10 @@
 const {
   e,
-  l,
-  ffi,
   ref,
   Struct,
-  Union,
   ArrayType,
-  from_hex,
   en,
-  push_export,
-  push_functions
+  push_export
 } = require('./api');
 
 e.SDL_MESSAGEBOX_ERROR = en(0x00000010);
