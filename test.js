@@ -291,6 +291,12 @@ async function tick() {
   }
 
   // TODO: Does it work?
-  SDL_RenderPresent.async(renderer, tick);
+  if (process.platform == 'win32') {
+    SDL_RenderPresent.async(renderer, tick);
+  }
+  else {
+    SDL_RenderPresent(renderer);
+    setImmediate(tick);
+  }
 }
 tick();
