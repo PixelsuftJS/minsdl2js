@@ -185,6 +185,7 @@ async function tick() {
         IMG_Quit();
         SDL_Quit();
         log('Allocations:', SDL_GetNumAllocations());
+        process.exit(0);
         return;
       case SDL_MOUSEMOTION:
         mouse_point.x = event.motion.x;
