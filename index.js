@@ -34,9 +34,6 @@ require('./render');
 exports.load_sdl2_library = function(library_path, ...ignore_list) {
   api.ignore_list = ignore_list;
   api.library = api.ffi.Library(library_path, api.join_exports());
-  Object.entries(api.join_functions()).forEach(([key, value]) => {
-    api.library[key] = value;
-  });
   exports.export_sdl2_library(api.l);
   return api.library;
 }
@@ -85,9 +82,6 @@ exports.export_sdl2_mixer_library = function(export_obj) {
 
 exports.load_sdl2_net_library = function(library_path, ...ignore_list) {
   api.net_library = api.ffi.Library(library_path, api.clear_ignore(require('./net').library_exports, ignore_list));
-  Object.entries(require('./net').library_functions).forEach(([key, value]) => {
-    api.net_library[key] = value;
-  });
   return api.net_library;
 }
 exports.export_sdl2_net_library = function(export_obj) {
