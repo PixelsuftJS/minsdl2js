@@ -10,7 +10,7 @@ function fatal() {
 }
 
 function log(...data) {
-  console.log(...data);
+  return console.log(...data);
 }
 
 function random_bool() {
@@ -126,6 +126,7 @@ const renderer = SDL_CreateRenderer(
 );
 if (renderer == null)
   fatal();
+SDL_SetAssertionHandler(log, null);
 
 /*const wavSpec = new SDL_AudioSpec;
 const wavLength = new Uint32Array(1);
