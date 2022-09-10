@@ -1,6 +1,7 @@
 const {
   e,
   Struct,
+  Func,
   from_hex,
   en,
   push_export
@@ -133,6 +134,8 @@ e.SDL_DisplayMode = Struct({
   driverdata: 'void*'
 });
 
+e.SDL_HitTestResult = Func('int', ['void*', 'void*', 'void*']);
+
 push_export({
   'SDL_GetNumVideoDrivers': ['int', []],
   'SDL_GetVideoDriver': ['string', ['int']],
@@ -204,6 +207,7 @@ push_export({
   'SDL_SetWindowInputFocus': ['int', ['void*']],
   'SDL_SetWindowGammaRamp': ['int', ['void*', 'Uint16*', 'Uint16*', 'Uint16*']],
   'SDL_GetWindowGammaRamp': ['int', ['void*', 'Uint16*', 'Uint16*', 'Uint16*']],
+  'SDL_SetWindowHitTest': ['int', ['void*', e.SDL_HitTestResult, 'void*']],
   'SDL_FlashWindow': ['int', ['void*', 'int']],
   'SDL_DestroyWindow': ['void', ['void*']],
   'SDL_IsScreenSaverEnabled': ['int', []],

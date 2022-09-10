@@ -1,6 +1,8 @@
 const {
   e,
   en,
+  ref,
+  Func,
   push_export
 } = require('./api');
 
@@ -35,6 +37,8 @@ e.SDL_LOG_PRIORITY_ERROR = en();
 e.SDL_LOG_PRIORITY_CRITICAL = en();
 e.SDL_NUM_LOG_PRIORITIES = en();
 
+e.SDL_LogOutputFunction = Func('void', ['void*', 'int', 'int', 'string']);
+
 push_export({
   'SDL_LogSetAllPriority': ['void', ['int']],
   'SDL_LogSetPriority': ['void', ['int', 'int']],
@@ -49,6 +53,6 @@ push_export({
   'SDL_LogCritical': ['void', ['int', 'string']],
   'SDL_LogMessage': ['void', ['int', 'int', 'string']],
   'SDL_LogMessageV': ['void', ['int', 'int', 'string', 'void*']],
-  'SDL_LogGetOutputFunction': ['void', ['void**', 'void**']],
-  'SDL_LogSetOutputFunction': ['void', ['void*', 'void*']],
+  'SDL_LogGetOutputFunction': ['void', [ref.refType(e.SDL_LogOutputFunction), 'void**']],
+  'SDL_LogSetOutputFunction': ['void', [e.SDL_LogOutputFunction, 'void*']],
 });

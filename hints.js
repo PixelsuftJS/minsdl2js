@@ -1,6 +1,7 @@
 const {
   e,
   en,
+  Func,
   push_export
 } = require('./api');
 
@@ -168,13 +169,15 @@ e.SDL_HINT_DEFAULT = en(0);
 e.SDL_HINT_NORMAL = en();
 e.SDL_HINT_OVERRIDE = en();
 
+e.SDL_HintCallback = Func('void', ['void*', 'string', 'string', 'string']);
+
 push_export({
   'SDL_SetHintWithPriority': ['int', ['string', 'string', 'int']],
   'SDL_SetHint': ['int', ['string', 'string']],
   'SDL_ResetHint': ['int', ['string']],
   'SDL_GetHint': ['string', ['string']],
   'SDL_GetHintBoolean': ['int', ['string', 'int']],
-  'SDL_AddHintCallback': ['void', ['string', 'void*', 'void*']],
-  'SDL_DelHintCallback': ['void', ['string', 'void*', 'void*']],
+  'SDL_AddHintCallback': ['void', ['string', e.SDL_HintCallback, 'void*']],
+  'SDL_DelHintCallback': ['void', ['string', e.SDL_HintCallback, 'void*']],
   'SDL_ClearHints': ['void', []]
 });

@@ -4,6 +4,7 @@ const {
   ref,
   en,
   Struct,
+  Func,
   from_hex,
   push_export,
   push_functions
@@ -70,6 +71,11 @@ e.SDL_FOURCC = function(A, B, C, D) {
     (D & 0xFF) << 24;
 }
 
+e.SDL_malloc_func = Func('void*', ['size_t']);
+e.SDL_calloc_func = Func('void*', ['size_t', 'size_t']);
+e.SDL_realloc_func = Func('void*', ['void*', 'size_t']);
+e.SDL_free_func = Func('void', ['void*']);
+
 push_functions({
   'SDL_stack_alloc': function(type_size, count) {
     return l.SDL_malloc(type_size * count);
@@ -118,9 +124,9 @@ push_export({
   'SDL_calloc': ['void*', ['size_t', 'size_t']],
   'SDL_realloc': ['void*', ['void*', 'size_t']],
   'SDL_free': ['void', ['void*']],
-  'SDL_GetOriginalMemoryFunctions': ['void', ['void*', 'void*', 'void*', 'void*']],
-  'SDL_GetMemoryFunctions': ['void', ['void**', 'void**', 'void**', 'void*']],
-  'SDL_SetMemoryFunctions': ['int', ['void*', 'void*', 'void*', 'void']],
+  'SDL_GetOriginalMemoryFunctions': ['void', [ref.refType(e.SDL_malloc_func), ref.refType(e.SDL_calloc_func), ref.refType(e.SDL_realloc_func), ref.refType(e.SDL_free_func)]],
+  'SDL_GetMemoryFunctions': ['void', [ref.refType(e.SDL_malloc_func), ref.refType(e.SDL_calloc_func), ref.refType(e.SDL_realloc_func), ref.refType(e.SDL_free_func)]],
+  'SDL_SetMemoryFunctions': ['int', [e.SDL_malloc_func, e.SDL_calloc_func, e.SDL_realloc_func, e.SDL_free_func]],
   'SDL_GetNumAllocations': ['int', []],
   'SDL_getenv': ['string', ['string']],
   'SDL_setenv': ['int', ['string', 'string', 'int']],

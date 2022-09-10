@@ -3,6 +3,7 @@ const {
   l,
   ref,
   Struct,
+  Func,
   en,
   push_export
 } = require('./api');
@@ -47,6 +48,8 @@ e.SDL_BlitSurface = function(src, srcrect, dst, dstrect) {
 e.SDL_BlitScaled = function(src, srcrect, dst, dstrect) {
   return l.SDL_UpperBlitScaled(src, srcrect, dst, dstrect);
 }
+
+e.SDL_blit = Func('int', ['void*', 'void*', 'void*', 'void*']);
 
 push_export({
   'SDL_CreateRGBSurface': [ref.refType(e.SDL_Surface), ['Uint32', 'int', 'int', 'int', 'Uint32', 'Uint32', 'Uint32', 'Uint32']],

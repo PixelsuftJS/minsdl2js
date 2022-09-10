@@ -1,6 +1,7 @@
 const {
   e,
   en,
+  Func,
   push_export
 } = require('./api');
 
@@ -9,9 +10,11 @@ e.SDL_THREAD_PRIORITY_NORMAL = en();
 e.SDL_THREAD_PRIORITY_HIGH = en();
 e.SDL_THREAD_PRIORITY_TIME_CRITICAL = en();
 
+e.SDL_ThreadFunction = Func('int', ['void*']);
+
 push_export({
-  'SDL_CreateThread': ['void*', ['int*', 'string', 'void*', 'void*', 'void*']],
-  'SDL_CreateThreadWithStackSize': ['void*', ['int*', 'string', 'size_t', 'void*', 'void*', 'void*']],
+  'SDL_CreateThread': ['void*', [e.SDL_ThreadFunction, 'string', 'void*', 'void*', 'void*']],
+  'SDL_CreateThreadWithStackSize': [e.SDL_ThreadFunction, ['int*', 'string', 'size_t', 'void*', 'void*', 'void*']],
   'SDL_GetThreadName': ['string', ['void*']],
   'SDL_ThreadID': ['Ulong', []],
   'SDL_GetThreadID': ['Ulong', ['void*']],

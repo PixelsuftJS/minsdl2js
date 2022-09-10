@@ -2,6 +2,7 @@ const {
   e,
   ref,
   Struct,
+  Func,
   en,
   push_export
 } = require('./api');
@@ -83,6 +84,9 @@ e.Mix_OutOfMemory = function(...data) {
 e.MIX_CHANNEL_POST = -2;
 e.MIX_EFFECTSMAXSPEED = "MIX_EFFECTSMAXSPEED";
 
+e.Mix_EffectFunc_t = Func('void', ['int', 'void*', 'int', 'void*']);
+e.Mix_EffectDone_t = Func('void', ['int', 'void*']);
+
 exports.library_exports = {
   'Mix_Linked_Version': [ref.refType(e.SDL_version), []],
   'Mix_Init': ['int', ['int']],
@@ -117,8 +121,8 @@ exports.library_exports = {
   'Mix_HookMusicFinished': ['void', ['void*']],
   'Mix_GetMusicHookData': ['void*', []],
   'Mix_ChannelFinished': ['void', ['void*']],
-  'Mix_RegisterEffect': ['int', ['int', 'void*', 'void*', 'void*']],
-  'Mix_UnregisterEffect': ['int', ['int', 'void*']],
+  'Mix_RegisterEffect': ['int', ['int', e.Mix_EffectFunc_t, e.Mix_EffectDone_t, 'void*']],
+  'Mix_UnregisterEffect': ['int', ['int', e.Mix_EffectFunc_t]],
   'Mix_UnregisterAllEffects': ['int', ['int']],
   'Mix_SetPanning': ['int', ['int', 'Uint8', 'Uint8']],
   'Mix_SetPosition': ['int', ['int', 'int16', 'Uint8']],
