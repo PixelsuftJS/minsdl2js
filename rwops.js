@@ -1,6 +1,7 @@
 const {
   e,
   ref,
+  Func,
   Struct,
   Union,
   push_export
@@ -51,11 +52,11 @@ hidden['unknown'] = Struct({
 });
 
 e.SDL_RWops = Struct({
-  size: 'int64*',
-  seek: 'int64*',
-  read: 'size_t*',
-  write: 'size_t*',
-  close: 'int*',
+  size: Func('int64', ['void*']),
+  seek: Func('int64', ['void*', 'int64', 'int']),
+  read: Func('size_t', ['void*', 'void*', 'size_t', 'size_t']),
+  write: Func('size_t', ['void*', 'void*', 'size_t', 'size_t']),
+  close: Func('int', ['void*']),
   type: 'Uint32',
   hidden: Union(hidden)
 });

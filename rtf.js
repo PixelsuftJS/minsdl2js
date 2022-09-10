@@ -2,6 +2,7 @@ const {
   e,
   ref,
   Struct,
+  Func,
   en,
   push_export
 } = require('./api');
@@ -45,11 +46,11 @@ e.RTF_FONT_ENGINE_VERSION = 1;
 
 e.RTF_FontEngine = Struct({
   version: 'int',
-  CreateFont: 'void*',
-  GetLineSpacing: 'int*',
-  GetCharacterOffsets: 'int*',
-  RenderText: 'void**',
-  FreeFont: 'void*'
+  CreateFont: ref.refType(Func('void', ['string', 'int', 'int', 'int', 'int'])),
+  GetLineSpacing: Func('int', ['void*']),
+  GetCharacterOffsets: Func('int', ['void*', 'string', 'int*', 'int*', 'int']),
+  RenderText: Func(e.SDL_Texture, ['void*', 'void*', 'string', e.SDL_Color),
+  FreeFont: Func('void*', ['void*'])
 });
 
 e.RTF_SetError = function(...data) {

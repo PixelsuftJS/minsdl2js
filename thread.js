@@ -23,6 +23,6 @@ push_export({
   'SDL_DetachThread': ['void', ['void*']],
   'SDL_TLSCreate': ['Uint', []],
   'SDL_TLSGet': ['void*', ['int']],
-  'SDL_TLSSet': ['int', ['int', 'void*', 'void*']],
+  'SDL_TLSSet': ['int', ['int', 'void*', Func('void', ['void*'])]],
   'SDL_TLSCleanup': ['void', []]
 });

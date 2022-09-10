@@ -7,7 +7,5 @@ npm i minsdl2js
 ## Examples
 See [`test.js`](https://github.com/PixelsuftJS/minsdl2js/blob/main/test.js)
 ## TODO
-- Callbacks are void* <br />
-- OpenGL <br />
-- Fix/Rewrite Example <br />
+- Improve/Rewrite Example <br />
 - Fix Bugs if Exist

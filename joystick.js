@@ -1,6 +1,7 @@
 const {
   e,
   Struct,
+  Func,
   en,
   push_export
 } = require('./api');
@@ -55,12 +56,12 @@ e.SDL_VirtualJoystickDesc = Struct({
   axis_mask: 'Uint32',
   name: 'string',
   userdata: 'void*',
-  Update: 'void*',
-  SetPlayerIndex: 'void*',
-  Rumble: 'int*',
-  RumbleTriggers: 'int*',
-  SetLED: 'int*',
-  SendEffect: 'int*'
+  Update: Func('void', ['void*']),
+  SetPlayerIndex: Func('void', ['void*', 'int']),
+  Rumble: Func('int', ['void*', 'Uint16', 'Uint16']),
+  RumbleTriggers: Func('int', ['void*', 'Uint16', 'Uint16']),
+  SetLED: Func('int', ['void*', 'Uint8', 'Uint8', 'Uint8']),
+  SendEffect: Func('int', ['void*', 'void*', 'int'])
 });
 
 push_export({
