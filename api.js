@@ -19,7 +19,10 @@ exports.net_library = {};
 exports.gfx_library = {};
 exports.ffi = ffi;
 exports.ref = ref;
-exports.Func = ffi.Function;
+exports.Func = function(...data) {
+  // data[0] += '*';
+  return ffi.Function(...data);
+}
 exports.SFunc = ffi.Function;
 exports.Struct = Struct;
 exports.Union = Union;

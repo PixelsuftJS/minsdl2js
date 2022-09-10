@@ -4,6 +4,7 @@ const {
   ref,
   Struct,
   ArrayType,
+  Func,
   en,
   push_export
 } = require('./api');
@@ -67,6 +68,9 @@ e.SDL_AUDIOCVT_MAX_FILTERS = 9;
 
 e.SDL_MIX_MAXVOLUME = 128;
 
+e.SDL_AudioCallback = Func('void', ['void*', 'Uint8*', 'int']);
+e.SDL_AudioFilter = Func('void', ['void*', 'Uint16']);
+
 e.SDL_AudioSpec = Struct({
   freq: 'int',
   format: 'Uint16',
@@ -75,7 +79,7 @@ e.SDL_AudioSpec = Struct({
   samples: 'Uint16',
   padding: 'Uint16',
   size: 'Uint32',
-  callback: 'void*',
+  callback: e.SDL_AudioCallback,
   userdata: 'void*'
 });
 e.SDL_AudioCVT = Struct({
@@ -88,7 +92,7 @@ e.SDL_AudioCVT = Struct({
   len_cvt: 'int',
   len_mult: 'int',
   len_ratio: 'double',
-  filters: ArrayType('void*', e.SDL_AUDIOCVT_MAX_FILTERS + 1),
+  filters: ArrayType(e.SDL_AudioFilter, e.SDL_AUDIOCVT_MAX_FILTERS + 1),
   filter_index: 'int'
 });
 

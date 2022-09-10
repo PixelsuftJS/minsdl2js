@@ -5,6 +5,7 @@ const {
   Struct,
   Union,
   ArrayType,
+  Func,
   en,
   push_export,
   push_functions
@@ -376,6 +377,8 @@ e.SDL_Event = Union({
   padding: ArrayType('Uint8', ref.sizeof.pointer <= 8 ? 56 : ref.sizeof.pointer == 16 ? 64 : 3 * ref.sizeof.pointer)
 });
 
+e.SDL_EventFilter = Func('int', ['void*', 'void*']);
+
 push_functions({
   'SDL_GetEventState': function(type) {
     return l.SDL_EventState(type, e.SDL_QUERY);
@@ -393,10 +396,11 @@ push_export({
   'SDL_WaitEvent': ['int', ['void*']],
   'SDL_WaitEventTimeout': ['int', ['void*', 'int']],
   'SDL_PushEvent': ['int', ['void*']],
-  'SDL_SetEventFilter': ['void', ['void*', 'void*']],
-  'SDL_GetEventFilter': ['int', ['void**', 'void**']],
-  'SDL_AddEventWatch': ['void', ['void*', 'void*']],
-  'SDL_DelEventWatch': ['void', ['void*', 'void*']],
+  'SDL_SetEventFilter': ['void', [e.SDL_EventFilter, 'void*']],
+  'SDL_GetEventFilter': ['int', [ref.refType(e.SDL_EventFilter), 'void**']],
+  'SDL_AddEventWatch': ['void', [e.SDL_EventFilter, 'void*']],
+  'SDL_DelEventWatch': ['void', [e.SDL_EventFilter, 'void*']],
+  'SDL_FilterEvents': ['void', [e.SDL_EventFilter, 'void*']],
   'SDL_EventState': ['Uint8', ['Uint32', 'int']],
   'SDL_RegisterEvents': ['Uint32', ['int']]
 });
