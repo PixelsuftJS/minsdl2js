@@ -3,9 +3,32 @@ const {
   l,
   ref,
   en,
+  from_hex,
   push_export,
   push_functions
 } = require('./api');
+
+e.SDL_SIZE_MAX = (1 << ref.sizeof.size_t) - 1;
+
+e.SDL_FALSE = 0;
+e.SDL_TRUE = 1;
+
+e.SDL_MAX_SINT8 = 0x7F;
+e.SDL_MIN_SINT8 = ~0x7F;
+e.SDL_MAX_UINT8 = 0xFF;
+e.SDL_MIN_UINT8 = 0x00;
+e.SDL_MAX_SINT16 = 0x7FFF;
+e.SDL_MIN_SINT16 = ~0x7FFF;
+e.SDL_MAX_UINT16 = 0xFFFF;
+e.SDL_MIN_UINT16 = 0x0000;
+e.SDL_MAX_SINT32 = 0x7FFFFFFF;
+e.SDL_MIN_SINT32 = ~0x7FFFFFFF;
+e.SDL_MAX_UINT32 = from_hex('0xFFFFFFFFu');
+e.SDL_MIN_UINT32 = 0x00000000;
+e.SDL_MAX_SINT64 = from_hex('0x7FFFFFFFFFFFFFFFll');
+e.SDL_MIN_SINT64 = ~from_hex('0x7FFFFFFFFFFFFFFFll');
+e.SDL_MAX_UINT64 = from_hex('0xFFFFFFFFFFFFFFFFull');
+e.SDL_MIN_UINT64 = from_hex('0x0000000000000000ull');
 
 e.SDL_FLT_EPSILON = 1.1920928955078125e-07;
 e.M_PI = Math.PI;
@@ -14,7 +37,12 @@ e.SDL_ICONV_E2BIG = -2;
 e.SDL_ICONV_EILSEQ = -3;
 e.SDL_ICONV_EINVAL = -4;
 
-e.SDL_SIZE_MAX = ref.sizeof.size_t - 1;
+e.SDL_FOURCC = function(A, B, C, D) {
+  return (A & 0xFF) << 0 |
+    (B & 0xFF) << 8 |
+    (C & 0xFF) << 16 |
+    (D & 0xFF) << 24;
+}
 
 push_functions({
   'SDL_stack_alloc': function(type_size, count) {
