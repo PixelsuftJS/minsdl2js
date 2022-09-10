@@ -1,6 +1,8 @@
 const {
   e,
   Struct,
+  Union,
+  ArrayType,
   en,
   push_export
 } = require('./api');
@@ -23,16 +25,39 @@ e.SDL_SYSWM_HAIKU = en();
 e.SDL_SYSWM_KMSDRM = en();
 e.SDL_SYSWM_RISCOS = en();
 
+var msg = {};
+if (process.platform == 'win32') {
+  msg['win'] = Struct({
+    hwnd: 'void*',
+    msg: 'Uint',
+    wParam: 'Uint*',
+    lParam: 'Uint*'
+  });
+}
+// TODO: some other platforms specific
+msg['dummy'] = 'int';
+
+var info = {};
+if (process.platform == 'win32') {
+  info['win'] = Struct({
+    window: 'void*',
+    hdc: 'void*',
+    hinstance: 'void*'
+  });
+}
+// TODO: some other platforms specific
+info['dummy'] = ArrayType('Uint8', 64);
+
 e.SDL_SysWMmsg = Struct({
   version: e.SDL_version,
   subsystem: 'int',
-  info: 'void*' // TODO
+  msg: Union(msg)
 });
 
 e.SDL_SysWMinfo = Struct({
   version: e.SDL_version,
   subsystem: 'int',
-  info: 'void*' // TODO
+  info: Union(info)
 });
 
 push_export({

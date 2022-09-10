@@ -3,6 +3,7 @@ const {
   l,
   ref,
   en,
+  Struct,
   from_hex,
   push_export,
   push_functions
@@ -36,6 +37,31 @@ e.SDL_ICONV_ERROR = -1;
 e.SDL_ICONV_E2BIG = -2;
 e.SDL_ICONV_EILSEQ = -3;
 e.SDL_ICONV_EINVAL = -4;
+
+/*
+https://stackoverflow.com/questions/5672746/what-exactly-is-the-file-keyword-in-c
+typedef struct _iobuf
+{
+    char*   _ptr;
+    int _cnt;
+    char*   _base;
+    int _flag;
+    int _file;
+    int _charbuf;
+    int _bufsiz;
+    char*   _tmpfname;
+} FILE;
+*/
+e.FILE = Struct({
+  _ptr: 'string',
+  _cnt: 'int',
+  _base: 'string',
+  _flag: 'int',
+  _file: 'int',
+  _charbuf: 'int',
+  _bufsiz: 'int',
+  _tmpfname: 'string'
+});
 
 e.SDL_FOURCC = function(A, B, C, D) {
   return (A & 0xFF) << 0 |

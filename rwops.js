@@ -2,6 +2,7 @@ const {
   e,
   ref,
   Struct,
+  Union,
   push_export
 } = require('./api');
 
@@ -16,6 +17,39 @@ e.RW_SEEK_SET = 0;
 e.RW_SEEK_CUR = 1;
 e.RW_SEEK_END = 2;
 
+var hidden = {};
+if (process.platform == 'android') {
+  hidden['androidio'] = Struct({
+    asset: 'void*'
+  });
+}
+else if (process.platform == 'win32') {
+  hidden['windowsio'] = Struct({
+    append: 'int',
+    h: 'void*',
+    buffer: Struct({
+      data: 'void*',
+      size: 'size_t',
+      left: 'size_t'
+    })
+  });
+}
+if (typeof process.env.sdl_disable_stdio == 'undefined') {
+  hidden['stdio'] = Struct({
+    autoclose: 'int',
+    fp: ref.refType(e.FILE)
+  });
+}
+hidden['mem'] = Struct({
+  base: 'Uint8*',
+  here: 'Uint8*',
+  stop: 'Uint8*'
+});
+hidden['unknown'] = Struct({
+  data1: 'void*',
+  data2: 'void*'
+});
+
 e.SDL_RWops = Struct({
   size: 'int64*',
   seek: 'int64*',
@@ -23,7 +57,7 @@ e.SDL_RWops = Struct({
   write: 'size_t*',
   close: 'int*',
   type: 'Uint32',
-  hidden: 'void*' // TODO
+  hidden: Union(hidden)
 });
 
 push_export({
