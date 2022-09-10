@@ -39,8 +39,10 @@ function get_closest_renderer() {
     return renderer_index;
   if ((renderer_index = renderers.indexOf('direct3d')) >= 0)
     return renderer_index;
-  if ((renderer_index = renderers.indexOf('opengl')) >= 0)
+  if ((renderer_index = renderers.indexOf('opengl')) >= 0) {
+    can_async_flip = false;
     return renderer_index;
+  }
   return -1;
 }
 
@@ -114,6 +116,7 @@ if (icon = SDL_CreateRGBSurface(0, 32, 32, 32, 0, 0, 0, 0)) {
   SDL_SetWindowIcon(window, icon);
   SDL_FreeSurface(icon);
 } else fatal();
+var can_async_flip = true;
 const renderer = SDL_CreateRenderer(
   window,
   get_closest_renderer(),
@@ -139,6 +142,7 @@ if (fs.existsSync(music_path)) {
   Mix_PlayMusic(music, -1);
 }
 
+const timer_freq = SDL_GetPerformanceFrequency();
 const bg_path = 'D:/other/win7.png';
 const font_path = 'C:/Windows/Fonts/segoeuib.ttf';
 const bg = fs.existsSync(bg_path) ? IMG_Load(bg_path) : null;
@@ -158,7 +162,7 @@ var speed_x = 250 * (Math.random() + 0.5);
 var speed_y = 250 * (Math.random() + 0.5);
 var is_colliding = false;
 var delta_array = new Array(50).fill(0);
-var last_tick = SDL_GetTicks();
+var last_tick = SDL_GetPerformanceCounter();
 
 log('Allocations:', SDL_GetNumAllocations());
 
@@ -213,8 +217,8 @@ async function tick() {
         break;
     }
   }
-  const now = SDL_GetTicks();
-  const delta = (now - last_tick) / 1000;
+  const now = SDL_GetPerformanceCounter();
+  const delta = (now - last_tick) / timer_freq;
   last_tick = now;
 
   cube_rect.x += speed_x * delta;
@@ -292,10 +296,9 @@ async function tick() {
   }
 
   // TODO: Does it work?
-  if (process.platform == 'win32') {
+  if (can_async_flip) {
     SDL_RenderPresent.async(renderer, tick);
-  }
-  else {
+  } else {
     SDL_RenderPresent(renderer);
     setImmediate(tick);
   }

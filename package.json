@@ -1,6 +1,6 @@
 {
   "name": "minsdl2js",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Pure SDL2 bindings for NodeJS using ffi-napi",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Pixelsuft/minsdl2js.git"
+    "url": "git+https://github.com/PixelsuftJS/minsdl2js.git"
   },
   "keywords": [
     "sdl2",
@@ -25,9 +25,9 @@
   "author": "Pixelsuft",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/Pixelsuft/minsdl2js/issues"
+    "url": "https://github.com/PixelsuftJS/minsdl2js/issues"
   },
-  "homepage": "https://github.com/Pixelsuft/minsdl2js#readme",
+  "homepage": "https://github.com/PixelsuftJS/minsdl2js#readme",
   "dependencies": {
     "ffi-napi": "^4.0.3",
     "ref-array-di": "^1.2.2",
