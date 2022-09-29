@@ -4,6 +4,7 @@ const {
   Struct,
   Func,
   en,
+  defines,
   push_export
 } = require('./api');
 
@@ -26,10 +27,14 @@ e.SDL_AssertData = Struct({
 e.SDL_AssertionHandler = Func('int', [ref.refType(e.SDL_AssertData), 'void*']);
 
 push_export({
-  'SDL_ReportAssertion': ['int', ['void*', 'string', 'string', 'int']],
   'SDL_GetDefaultAssertionHandler': [e.SDL_AssertionHandler, []],
   'SDL_GetAssertionHandler': [e.SDL_AssertionHandler, ['void**']],
   'SDL_SetAssertionHandler': ['void', [e.SDL_AssertionHandler, 'void*']],
   'SDL_GetAssertionReport': [ref.refType(e.SDL_AssertData), []],
   'SDL_ResetAssertionReport': ['void', []]
 });
+if (defines['SDL_ASSERT_LEVEL']) {
+  push_export({
+    'SDL_ReportAssertion': ['int', ['void*', 'string', 'string', 'int']]
+  });
+}

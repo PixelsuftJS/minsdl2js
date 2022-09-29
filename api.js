@@ -9,6 +9,28 @@ var library_exports = [];
 var library_functions = [];
 var enerator;
 
+exports.defines = {
+  SDL_ASSERT_LEVEL: 0,
+  SDL_DYNAMIC_API: 1,
+  HAVE_STDIO_H: 1
+};
+if ( /*typeof process.env.sdl2_defines == 'undefined'*/ true) {
+  if (process.platform == 'win32')
+    exports.defines['__WIN32__'] = exports.defines['SDL_VIDEO_DRIVER_WINDOWS'] = 1;
+  if (process.platform == 'android')
+    exports.defines['__ANDROID__'] = exports.defines['SDL_VIDEO_DRIVER_ANDROID'] = 1;
+}
+if (typeof process.env.sdl2_defines !== 'undefined') {
+  const str_defines = process.env.sdl2_defines.split(';');
+  for (var i = 0; i < str_defines.length; i++) {
+    const str_define = str_defines[i];
+    if (str_define.includes('=')) {
+      exports.defines[str_define.split('=')[0].trim()] = eval(str_define.split('=')[1].trim());
+      continue;
+    }
+    exports.defines[str_define.trim()] = true;
+  }
+}
 exports.e = e;
 exports.l = {};
 exports.library = {};
@@ -53,7 +75,7 @@ exports.en = function(reset) {
 exports.encoder = new TextEncoder();
 exports.decoder = new TextDecoder();
 exports.default_terminator = '\x00';
-exports.from_utf16 = function(str, terminator=exports.default_terminator) {
+exports.from_utf16 = function(str, terminator = exports.default_terminator) {
   str += terminator;
   var arr = new Uint16Array(str.length);
   for (var i = 0; i < str.length; i++) {
@@ -61,16 +83,16 @@ exports.from_utf16 = function(str, terminator=exports.default_terminator) {
   }
   return arr;
 }
-exports.to_utf16 = function(arr, terminator=exports.default_terminator) {
+exports.to_utf16 = function(arr, terminator = exports.default_terminator) {
   return exports.trim_terminator(String.fromCharCode(...arr), terminator);
 }
-exports.from_utf8 = function(str, terminator=exports.default_terminator) {
+exports.from_utf8 = function(str, terminator = exports.default_terminator) {
   return encoder.encode(str + terminator);
 }
-exports.to_utf8 = function(arr, terminator=exports.default_terminator) {
+exports.to_utf8 = function(arr, terminator = exports.default_terminator) {
   return exports.trim_terminator(decoder.decode(arr), terminator);
 }
-exports.trim_terminator = function(str, terminator=exports.default_terminator) {
+exports.trim_terminator = function(str, terminator = exports.default_terminator) {
   const terminator_index = str.indexOf(terminator);
   if (!terminator || terminator_index < 0)
     return str;

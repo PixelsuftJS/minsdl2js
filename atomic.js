@@ -10,6 +10,13 @@ e.SDL_atomic_t = Struct({
   value: 'int'
 });
 
+e.SDL_AtomicIncRef = function(a) {
+  return l.SDL_AtomicAdd(a, 1);
+}
+e.SDL_AtomicDecRef = function(a) {
+  return l.SDL_AtomicAdd(a, -1) == 1;
+}
+
 push_functions({
   'SDL_CompilerBarrier': function() {
     var tmp = 0;
@@ -21,12 +28,6 @@ push_functions({
   },
   'SDL_MemoryBarrierAcquire': function() {
     return l.SDL_MemoryBarrierAcquireFunction();
-  },
-  'SDL_AtomicIncRef': function(a) {
-    return l.SDL_AtomicAdd(a, 1);
-  },
-  'SDL_AtomicDecRef': function(a) {
-    return l.SDL_AtomicAdd(a, -1) == 1;
   }
 });
 

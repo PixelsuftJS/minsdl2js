@@ -1,6 +1,7 @@
 const {
   e,
   ref,
+  defines,
   Func,
   Struct,
   Union,
@@ -19,12 +20,12 @@ e.RW_SEEK_CUR = 1;
 e.RW_SEEK_END = 2;
 
 var hidden = {};
-if (process.platform == 'android') {
+if (defines['__ANDROID__']) {
   hidden['androidio'] = Struct({
     asset: 'void*'
   });
 }
-else if (process.platform == 'win32') {
+else if (defines['__WIN32__'] || defines['__GDK__']) {
   hidden['windowsio'] = Struct({
     append: 'int',
     h: 'void*',
@@ -35,7 +36,7 @@ else if (process.platform == 'win32') {
     })
   });
 }
-if (typeof process.env.sdl_disable_stdio == 'undefined') {
+if (defines['HAVE_STDIO_H']) {
   hidden['stdio'] = Struct({
     autoclose: 'int',
     fp: ref.refType(e.FILE)

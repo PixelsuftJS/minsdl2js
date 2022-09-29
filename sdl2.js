@@ -2,7 +2,9 @@ const {
   e,
   l,
   ref,
+  defines,
   Struct,
+  Func,
   ArrayType,
   from_hex,
   en,
@@ -29,7 +31,7 @@ e.SDL_CACHELINE_SIZE = 128;
 // SDL_endian.h
 e.SDL_LIL_ENDIAN = 1234;
 e.SDL_BIG_ENDIAN = 4321;
-e.SDL_BYTEORDER = os.endianness() == 'LE' ? e.SDL_LIL_ENDIAN : e.SDL_BIG_ENDIAN;
+e.SDL_BYTEORDER = e.SDL_FLOATWORDORDER = os.endianness() == 'LE' ? e.SDL_LIL_ENDIAN : e.SDL_BIG_ENDIAN;
 
 // SDL_guid.h
 e.SDL_GUID = Struct({
@@ -53,6 +55,19 @@ e.SDL_POWERSTATE_CHARGED = en();
 e.SDL_REVISION = 'https://github.com/libsdl-org/SDL.git@8c9beb0c873f6ca5efbd88f1ad2648bfc793b2ac';
 e.SDL_REVISION_NUMBER = 0;
 
+// SDL_system.h
+if (defines['WIN32'] || defines['__WINGDK__']) {
+  e.SDL_WindowsMessageHook = Func('void', ['void*', 'void*', 'Uint', 'Uint64', 'int64']);
+  push_export({
+    'SDL_SetWindowsMessageHook': ['void', [e.SDL_WindowsMessageHook, 'void*']],
+    'SDL_Direct3D9GetAdapterIndex': ['int', ['int']],
+    'SDL_RenderGetD3D9Device': ['void*', ['void*']],
+    'SDL_RenderGetD3D11Device': ['void*', ['void*']],
+    'SDL_RenderGetD3D12Device': ['void*', ['void*']],
+    'SDL_DXGIGetOutputInfo': ['int', ['int', 'int', 'int*', 'int*']]
+  });
+}
+
 // SDL_timer.h
 e.SDL_TICKS_PASSED = function(A, B) {
   return (B - A) <= 0;
@@ -65,6 +80,22 @@ push_functions({
       return true;
     }
     return false;
+  },
+  'SDL_MostSignificantBitIndex32': function(x) {
+   const b = new Uint32Array([0x2, 0xC, 0xF0, 0xFF00, 0xFFFF0000]);
+   const S = new Int32Array([1, 2, 4, 8, 16]);
+   var msbIndex = 0;
+   var i;
+   if (x == 0) {
+     return -1;
+   }
+   for (i = 4; i >= 0; i--) {
+     if (x & b[i]) {
+       x >>= S[i];
+       msbIndex |= S[i];
+     }
+   }
+   return msbIndex;
   },
   // SDL_quit.h
   'SDL_QuitRequested': function() {
