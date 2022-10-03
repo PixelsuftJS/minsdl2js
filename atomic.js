@@ -2,8 +2,7 @@ const {
   e,
   l,
   Struct,
-  push_export,
-  push_functions
+  push_export
 } = require('./api');
 
 e.SDL_atomic_t = Struct({
@@ -16,20 +15,17 @@ e.SDL_AtomicIncRef = function(a) {
 e.SDL_AtomicDecRef = function(a) {
   return l.SDL_AtomicAdd(a, -1) == 1;
 }
-
-push_functions({
-  'SDL_CompilerBarrier': function() {
-    var tmp = 0;
-    l.SDL_AtomicLock(tmp);
-    return l.SDL_AtomicUnlock(tmp);
-  },
-  'SDL_MemoryBarrierRelease': function() {
-    return l.SDL_MemoryBarrierReleaseFunction();
-  },
-  'SDL_MemoryBarrierAcquire': function() {
-    return l.SDL_MemoryBarrierAcquireFunction();
-  }
-});
+e.SDL_CompilerBarrier = function() {
+  var tmp = 0;
+  l.SDL_AtomicLock(tmp);
+  return l.SDL_AtomicUnlock(tmp);
+}
+e.SDL_MemoryBarrierRelease = function() {
+  return l.SDL_MemoryBarrierReleaseFunction();
+}
+e.SDL_MemoryBarrierAcquire = function() {
+  return l.SDL_MemoryBarrierAcquireFunction();
+}
 
 push_export({
   'SDL_AtomicTryLock': ['int', ['int*']],
