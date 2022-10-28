@@ -378,6 +378,20 @@ e.GPU_ErrorObject = Struct({
   details: 'string',
   error: 'int'
 });
+e.GPU_RendererImpl = Struct({
+  Init: Func(ref.refType(e.GPU_Target), ['void*', e.GPU_RendererID, 'Uint16', 'Uint16', 'Uint32']),
+  CreateTargetFromWindow: Func(ref.refType(e.GPU_Target), ['void*', 'Uint32', 'void*']),
+  SetActiveTarget: Func(e.GPU_bool, ['void*', 'void*']),
+  CreateAliasTarget: Func(ref.refType(e.GPU_Target), ['void*', 'void*']),
+  MakeCurrent: Func('void', ['void*', 'void*', 'Uint32']),
+  SetAsCurrent: Func('void', ['void*']),
+  ResetRendererState: Func('void', ['void*']),
+  AddDepthBuffer: Func(e.GPU_bool, ['void*', 'void*']),
+  SetWindowResolution: Func(e.GPU_bool, ['void*', 'Uint16', 'Uint16']),
+  SetVirtualResolution: Func('void', ['void*', 'void*', 'Uint16', 'Uint16']),
+  UnsetVirtualResolution: Func('void', ['void*', 'void*']),
+  Quit: Func('void', ['void*']),
+});
 e.GPU_Renderer = Struct({
   id: e.GPU_RendererID,
   requested_id: e.GPU_RendererID,
@@ -390,11 +404,13 @@ e.GPU_Renderer = Struct({
   current_context_target: ref.refType(e.GPU_Target),
   default_image_anchor_x: 'float',
   default_image_anchor_y: 'float',
-  impl: 'void*', // TODO
+  impl: ref.refType(e.GPU_RendererImpl),
   coordinate_mode: e.GPU_bool,
   padding: ArrayType('char', e.SDL_GPU_BITNESS == 64 ? 7 : 3)
 });
 
 exports.library_exports = {
-
+  'GPU_AddWindowMapping': ['void', ['void*']],
+  'GPU_RemoveWindowMapping': ['void', ['Uint32']],
+  'GPU_RemoveWindowMappingByTarget': ['void', ['void*']]
 };
