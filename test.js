@@ -60,6 +60,7 @@ sdl2.load_sdl2_mixer_library(prefix + 'SDL2_mixer' + postfix);
 sdl2.load_sdl2_net_library(prefix + 'SDL2_net' + postfix);
 sdl2.load_sdl2_gfx_library(prefix + 'SDL2_gfx' + postfix);
 sdl2.load_sdl2_sound_library(prefix + 'SDL2_sound' + postfix);
+sdl2.load_sdl2_gpu_library(prefix + 'SDL2_gpu' + postfix);
 sdl2.export_sdl2_library(global);
 sdl2.export_sdl2_image_library(global);
 sdl2.export_sdl2_ttf_library(global);
@@ -68,6 +69,7 @@ sdl2.export_sdl2_mixer_library(global);
 sdl2.export_sdl2_net_library(global);
 sdl2.export_sdl2_gfx_library(global);
 sdl2.export_sdl2_sound_library(global);
+sdl2.export_sdl2_gpu_library(global);
 if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_AUDIO))
   fatal();
 if (!IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG))

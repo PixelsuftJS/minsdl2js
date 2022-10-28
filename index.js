@@ -127,4 +127,15 @@ exports.export_sdl2_rtf_library = function(export_obj) {
   return export_obj;
 }
 
+exports.load_sdl2_gpu_library = function(library_path, ...ignore_list) {
+  api.gpu_library = api.ffi.Library(library_path, api.clear_ignore(require('./gpu').library_exports, ignore_list));
+  return api.gpu_library;
+}
+exports.export_sdl2_gpu_library = function(export_obj) {
+  Object.entries(require('./gpu').library_exports).forEach(([key, value]) => {
+    export_obj[key] = api.gpu_library[key];
+  });
+  return export_obj;
+}
+
 exports.sdl2 = api;
