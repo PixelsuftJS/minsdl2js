@@ -189,6 +189,24 @@ e.GPU_LANGUAGE_GLSLES = en(3);
 e.GPU_LANGUAGE_HLSL = en(4);
 e.GPU_LANGUAGE_CG = en(5);
 
+e.GPU_ERROR_NONE = en(0);
+e.GPU_ERROR_BACKEND_ERROR = en(1);
+e.GPU_ERROR_DATA_ERROR = en(2);
+e.GPU_ERROR_USER_ERROR = en(3);
+e.GPU_ERROR_UNSUPPORTED_FUNCTION = en(4);
+e.GPU_ERROR_NULL_ARGUMENT = en(5);
+e.GPU_ERROR_FILE_NOT_FOUND = en(6);
+
+e.GPU_DEBUG_LEVEL_0 = en(0);
+e.GPU_DEBUG_LEVEL_1 = en(1);
+e.GPU_DEBUG_LEVEL_2 = en(2);
+e.GPU_DEBUG_LEVEL_3 = en(3);
+e.GPU_DEBUG_LEVEL_MAX = en(3);
+
+e.GPU_LOG_INFO = en(0);
+e.GPU_LOG_WARNING = en();
+e.GPU_LOG_ERROR = en();
+
 e.GPU_BlendMode = Struct({
   source_color: 'int',
   dest_color: 'int',
@@ -323,6 +341,58 @@ e.GPU_Target = Struct({
   use_depth_write: e.GPU_bool,
   is_alias: e.GPU_bool,
   padding: ArrayType('char', 1)
+});
+e.GPU_AttributeFormat = Struct({
+  num_elems_per_value: 'int',
+  type: 'Uint32',
+  stride_bytes: 'int',
+  offset_bytes: 'int',
+  is_per_sprite: e.GPU_bool,
+  normalize: e.GPU_bool,
+  padding: ArrayType('char', 2)
+});
+if (true) {
+  var _tmp = {
+    values: 'void*',
+    format: e.GPU_AttributeFormat,
+    location: 'int'
+  };
+  if (e.SDL_GPU_BITNESS) {
+    _tmp.padding = ArrayType('char', 4);
+  }
+  e.GPU_Attribute = Struct(_tmp);
+}
+e.GPU_AttributeSource = Struct({
+  next_value: 'void*',
+  per_vertex_storage: 'void*',
+  num_values: 'int',
+  per_vertex_storage_stride_bytes: 'int',
+  per_vertex_storage_offset_bytes: 'int',
+  per_vertex_storage_size: 'int',
+  attribute: e.GPU_Attribute,
+  enabled: e.GPU_bool,
+  padding: ArrayType('char', e.SDL_GPU_BITNESS == 64 ? 7 : 3)
+});
+e.GPU_ErrorObject = Struct({
+  function: 'string',
+  details: 'string',
+  error: 'int'
+});
+e.GPU_Renderer = Struct({
+  id: e.GPU_RendererID,
+  requested_id: e.GPU_RendererID,
+  SDL_init_flags: 'Uint32',
+  GPU_init_flags: 'Uint32',
+  shader_language: 'int',
+  min_shader_version: 'int',
+  max_shader_version: 'int',
+  enabled_features: 'Uint32',
+  current_context_target: ref.refType(e.GPU_Target),
+  default_image_anchor_x: 'float',
+  default_image_anchor_y: 'float',
+  impl: 'void*', // TODO
+  coordinate_mode: e.GPU_bool,
+  padding: ArrayType('char', e.SDL_GPU_BITNESS == 64 ? 7 : 3)
 });
 
 exports.library_exports = {
