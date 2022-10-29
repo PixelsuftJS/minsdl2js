@@ -82,6 +82,8 @@ if (SDLNet_Init())
   fatal();
 if (!Sound_Init())
   fatal();
+// if (!GPU_Init())
+//   fatal();
 log(`CPU: ${SDL_GetCPUCount()} CPUs, RAM: ${SDL_GetSystemRAM()}MB`);
 log('Platform:', SDL_GetPlatform());
 log('Video Driver:', SDL_GetCurrentVideoDriver());
@@ -179,6 +181,7 @@ async function tick() {
           SDL_DestroyTexture(bg_texture);
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
+        // GPU_Quit();
         Sound_Quit();
         SDLNet_Quit();
         if (music) {

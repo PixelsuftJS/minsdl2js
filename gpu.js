@@ -495,8 +495,32 @@ e.GPU_Renderer = Struct({
   padding: ArrayType('char', e.SDL_GPU_BITNESS == 64 ? 7 : 3)
 });
 
+e.GPU_GetCompiledVersion = function() {
+  return new e.SDL_Version({
+    major: e.SDL_GPU_VERSION_MAJOR,
+    minor: e.SDL_GPU_VERSION_MINOR,
+    patch: e.SDL_GPU_VERSION_PATCH
+  });
+}
+
 exports.library_exports = {
   'GPU_AddWindowMapping': ['void', ['void*']],
   'GPU_RemoveWindowMapping': ['void', ['Uint32']],
-  'GPU_RemoveWindowMappingByTarget': ['void', ['void*']]
+  'GPU_RemoveWindowMappingByTarget': ['void', ['void*']],
+  'GPU_GetLinkedVersion': [e.SDL_version, []],
+  'GPU_SetInitWindow': ['void', ['Uint32']],
+  'GPU_GetInitWindow': ['Uint32', []],
+  'GPU_SetPreInitFlags': ['void', ['Uint32']],
+  'GPU_GetPreInitFlags': ['Uint32', []],
+  'GPU_SetRequiredFeatures': ['void', ['Uint32']],
+  'GPU_GetRequiredFeatures': ['Uint32', []],
+  'GPU_GetDefaultRendererOrder': ['void', ['int*', 'int*']],
+  'GPU_GetRendererOrder': ['void', ['int*', 'int*']],
+  'GPU_SetRendererOrder': ['void', ['int', 'int*']],
+  'GPU_Init': [ref.refType(e.GPU_Target), ['Uint16', 'Uint16', 'Uint32']],
+  'GPU_InitRenderer': [ref.refType(e.GPU_Target), ['Uint32', 'Uint16', 'Uint16', 'Uint32']],
+  'GPU_InitRendererByID': [ref.refType(e.GPU_Target), ['int', 'Uint16', 'Uint16', 'Uint32']],
+  'GPU_IsFeatureEnabled': [e.GPU_bool, ['Uint32']],
+  'GPU_CloseCurrentRenderer': ['void', []],
+  'GPU_Quit': ['void', []]
 };
