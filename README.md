@@ -15,7 +15,7 @@ Pure JS SDL2 bindings for NodeJS using ffi-napi
 npm i minsdl2js
 ```
 ## Examples
-See [`test.js`](https://github.com/PixelsuftJS/minsdl2js/blob/main/test.js)
+ - [full test (really bad code)](https://github.com/PixelsuftJS/minsdl2js/blob/main/test.js) <br />
+ - [minsdl2js + chipmunk example](https://github.com/PixelsuftGames/minsdl2js-chipmunk-example)
 ## TODO
-- Improve/Rewrite Example <br />
 - Fix Bugs if Exist

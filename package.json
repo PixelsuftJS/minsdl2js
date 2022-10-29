@@ -1,6 +1,6 @@
 {
   "name": "minsdl2js",
-  "version": "2.24.4",
+  "version": "2.24.5",
   "description": "Pure SDL2 bindings for NodeJS using ffi-napi",
   "main": "index.js",
   "scripts": {
