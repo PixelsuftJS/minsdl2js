@@ -1,5 +1,6 @@
 const {
   e,
+  l,
   ref,
   Struct,
   Func,
@@ -502,6 +503,9 @@ e.GPU_GetCompiledVersion = function() {
     patch: e.SDL_GPU_VERSION_PATCH
   });
 }
+e.GPU_Log = function(...args) {
+  return l.GPU_LogInfo(...args);
+}
 
 exports.library_exports = {
   'GPU_AddWindowMapping': ['void', ['void*']],
@@ -514,13 +518,40 @@ exports.library_exports = {
   'GPU_GetPreInitFlags': ['Uint32', []],
   'GPU_SetRequiredFeatures': ['void', ['Uint32']],
   'GPU_GetRequiredFeatures': ['Uint32', []],
-  'GPU_GetDefaultRendererOrder': ['void', ['int*', 'int*']],
-  'GPU_GetRendererOrder': ['void', ['int*', 'int*']],
-  'GPU_SetRendererOrder': ['void', ['int', 'int*']],
+  'GPU_GetDefaultRendererOrder': ['void', ['int*', 'void*']],
+  'GPU_GetRendererOrder': ['void', ['int*', 'void*']],
+  'GPU_SetRendererOrder': ['void', ['int', 'void*']],
   'GPU_Init': [ref.refType(e.GPU_Target), ['Uint16', 'Uint16', 'Uint32']],
   'GPU_InitRenderer': [ref.refType(e.GPU_Target), ['Uint32', 'Uint16', 'Uint16', 'Uint32']],
-  'GPU_InitRendererByID': [ref.refType(e.GPU_Target), ['int', 'Uint16', 'Uint16', 'Uint32']],
+  'GPU_InitRendererByID': [ref.refType(e.GPU_Target), [e.GPU_RendererID, 'Uint16', 'Uint16', 'Uint32']],
   'GPU_IsFeatureEnabled': [e.GPU_bool, ['Uint32']],
   'GPU_CloseCurrentRenderer': ['void', []],
-  'GPU_Quit': ['void', []]
+  'GPU_Quit': ['void', []],
+  'GPU_SetDebugLevel': ['void', ['int']],
+  'GPU_GetDebugLevel': ['int', []],
+  'GPU_LogInfo': ['void', ['string']],
+  'GPU_LogWarning': ['void', ['string']],
+  'GPU_LogError': ['void', ['string']],
+  'GPU_SetLogCallback': ['void', [Func('int', ['int', 'string', 'void*'])]],
+  'GPU_PushErrorCode': ['void', ['string', 'int', 'string']],
+  'GPU_PopErrorCode': [e.GPU_ErrorObject, []],
+  'GPU_GetErrorString': ['string', ['int']],
+  'GPU_SetErrorQueueMax': ['void', ['Uint']],
+  'GPU_MakeRendererID': [e.GPU_RendererID, ['string', 'Uint32', 'int', 'int']],
+  'GPU_GetRendererID': [e.GPU_RendererID, ['Uint32']],
+  'GPU_GetNumRegisteredRenderers': ['int', []],
+  'GPU_GetRegisteredRendererList': ['void', ['void*']],
+  'GPU_RegisterRenderer': ['void', [e.GPU_RendererID, Func(ref.refType(e.GPU_Renderer), [e.GPU_RendererID]), Func('void', ['void*'])]],
+  'GPU_ReserveNextRendererEnum': ['Uint32', []],
+  'GPU_GetNumActiveRenderers': ['int', []],
+  'GPU_GetActiveRendererList': ['void', ['void*']],
+  'GPU_GetCurrentRenderer': [ref.refType(e.GPU_Renderer), []],
+  'GPU_SetCurrentRenderer': ['void', [e.GPU_RendererID]],
+  'GPU_GetRenderer': [ref.refType(e.GPU_Renderer), [e.GPU_RendererID]],
+  'GPU_FreeRenderer': ['void', ['void*']],
+  'GPU_ResetRendererState': ['void', []],
+  'GPU_SetCoordinateMode': ['void', [e.GPU_bool]],
+  'GPU_GetCoordinateMode': [e.GPU_bool, []],
+  'GPU_SetDefaultAnchor': ['void', ['float', 'float']],
+  'GPU_GetDefaultAnchor': ['void', ['float*', 'float*']]
 };
