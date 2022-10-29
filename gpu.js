@@ -690,5 +690,22 @@ exports.library_exports = {
   'GPU_Translate': ['void', ['float', 'float', 'float']],
   'GPU_Scale': ['void', ['float', 'float', 'float']],
   'GPU_Rotate': ['void', ['float', 'float', 'float', 'float']],
-  'GPU_MultMatrix': ['void', ['float*']]
+  'GPU_MultMatrix': ['void', ['float*']],
+  'GPU_Clear': ['void', ['void*']],
+  'GPU_ClearColor': ['void', ['void*', e.SDL_Color]],
+  'GPU_ClearRGB': ['void', ['void*', 'Uint8', 'Uint8', 'Uint8']],
+  'GPU_ClearRGBA': ['void', ['void*', 'Uint8', 'Uint8', 'Uint8', 'Uint8']],
+  'GPU_Blit': ['void', ['void*', 'void*', 'void*', 'float', 'float']],
+  'GPU_BlitRotate': ['void', ['void*', 'void*', 'void*', 'float', 'float', 'float']],
+  'GPU_BlitScale': ['void', ['void*', 'void*', 'void*', 'float', 'float', 'float', 'float']],
+  'GPU_BlitTransform': ['void', ['void*', 'void*', 'void*', 'float', 'float', 'float', 'float', 'float']],
+  'GPU_BlitTransformX': ['void', ['void*', 'void*', 'void*', 'float', 'float', 'float', 'float', 'float', 'float', 'float']],
+  'GPU_BlitRect': ['void', ['void*', 'void*', 'void*', 'void*']],
+  'GPU_BlitRectX': ['void', ['void*', 'void*', 'void*', 'void*', 'float', 'float', 'float', 'Uint32']],
+  'GPU_TriangleBatch': ['void', ['void*', 'void*', 'Ushort', 'float*', 'Uint', 'Ushort*', 'Uint32']],
+  'GPU_TriangleBatchX': ['void', ['void*', 'void*', 'Ushort', 'void*', 'Uint', 'Ushort*', 'Uint32']],
+  'GPU_PrimitiveBatch': ['void', ['void*', 'void*', 'Uint32', 'Ushort', 'float*', 'Uint', 'Ushort*', 'Uint32']],
+  'GPU_PrimitiveBatchV': ['void', ['void*', 'void*', 'Uint32', 'Ushort', 'void*', 'Uint', 'Ushort*', 'Uint32']],
+  'GPU_FlushBlitBuffer': ['void', []],
+  'GPU_Flip': ['void', ['void*']]
 };
