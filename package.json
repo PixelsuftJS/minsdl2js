@@ -1,6 +1,6 @@
 {
   "name": "minsdl2js",
-  "version": "2.24.2",
+  "version": "2.24.3",
   "description": "Pure SDL2 bindings for NodeJS using ffi-napi",
   "main": "index.js",
   "scripts": {
@@ -23,7 +23,7 @@
     "sdl2-wrapper"
   ],
   "author": "Pixelsuft",
-  "license": "GPL-3.0-or-later",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/PixelsuftJS/minsdl2js/issues"
   },
