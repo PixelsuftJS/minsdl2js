@@ -553,5 +553,21 @@ exports.library_exports = {
   'GPU_SetCoordinateMode': ['void', [e.GPU_bool]],
   'GPU_GetCoordinateMode': [e.GPU_bool, []],
   'GPU_SetDefaultAnchor': ['void', ['float', 'float']],
-  'GPU_GetDefaultAnchor': ['void', ['float*', 'float*']]
+  'GPU_GetDefaultAnchor': ['void', ['float*', 'float*']],
+  'GPU_GetContextTarget': [ref.refType(e.GPU_Target), []],
+  'GPU_GetWindowTarget': [ref.refType(e.GPU_Target), ['Uint32']],
+  'GPU_CreateTargetFromWindow': [ref.refType(e.GPU_Target), ['Uint32']],
+  'GPU_MakeCurrent': ['void', ['void*', 'Uint32']],
+  'GPU_SetWindowResolution': [e.GPU_bool, ['Uint16', 'Uint16']],
+  'GPU_SetFullscreen': [e.GPU_bool, [e.GPU_bool, e.GPU_bool]],
+  'GPU_GetFullscreen': [e.GPU_bool, []],
+  'GPU_GetActiveTarget': [ref.refType(e.GPU_Target), []],
+  'GPU_SetActiveTarget': [e.GPU_bool, ['void*']],
+  'GPU_SetShapeBlending': ['void', [e.GPU_bool]],
+  'GPU_GetBlendModeFromPreset': [e.GPU_BlendMode, ['int']],
+  'GPU_SetShapeBlendFunction': ['void', ['int', 'int', 'int', 'int']],
+  'GPU_SetShapeBlendEquation': ['void', ['int', 'int', 'int', 'int']],
+  'GPU_SetShapeBlendMode': ['void', ['int']],
+  'GPU_SetLineThickness': ['float', ['float']],
+  'GPU_GetLineThickness': ['float', []]
 };
