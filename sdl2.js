@@ -52,7 +52,7 @@ e.SDL_POWERSTATE_CHARGING = en();
 e.SDL_POWERSTATE_CHARGED = en();
 
 // SDL_revision.h
-e.SDL_REVISION = 'https://github.com/libsdl-org/SDL.git@a1d1946dcba6509f0679f507b57e7b228d32e6f8';
+e.SDL_REVISION = 'https://github.com/libsdl-org/SDL.git@55b03c7493a7abed33cf803d1380a40fa8af903f';
 e.SDL_REVISION_NUMBER = 0;
 
 // SDL_system.h
