@@ -173,6 +173,7 @@ push_export({
   'SDL_SetWindowSize': ['void', ['void*', 'int', 'int']],
   'SDL_GetWindowSize': ['void', ['void*', 'int*', 'int*']],
   'SDL_GetWindowBordersSize': ['int', ['void*', 'int*', 'int*', 'int*', 'int*']],
+  'SDL_GetWindowSizeInPixels': ['void', ['void*', 'int*', 'int*']],
   'SDL_SetWindowMinimumSize': ['void', ['void*', 'int', 'int']],
   'SDL_GetWindowMinimumSize': ['void', ['void*', 'int*', 'int*']],
   'SDL_SetWindowMaximumSize': ['void', ['void*', 'int', 'int']],

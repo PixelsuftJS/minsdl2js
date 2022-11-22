@@ -8,6 +8,10 @@ e.SDL_SENSOR_INVALID = en(-1);
 e.SDL_SENSOR_UNKNOWN = en();
 e.SDL_SENSOR_ACCEL = en();
 e.SDL_SENSOR_GYRO = en();
+e.SDL_SENSOR_ACCEL_L = en();
+e.SDL_SENSOR_GYRO_L = en();
+e.SDL_SENSOR_ACCEL_R = en();
+e.SDL_SENSOR_GYRO_R = en();
 
 e.SDL_STANDARD_GRAVITY = 9.80665;
 
@@ -26,6 +30,7 @@ push_export({
   'SDL_SensorGetNonPortableType': ['int', ['void*']],
   'SDL_SensorGetInstanceID': ['int32', ['void*']],
   'SDL_SensorGetData': ['int', ['void*', 'float*', 'int']],
+  'SDL_SensorGetDataWithTimestamp': ['int', ['void*', 'Uint64*', 'float*', 'int']],
   'SDL_SensorClose': ['void', ['void*']],
   'SDL_SensorUpdate': ['void', []]
 });

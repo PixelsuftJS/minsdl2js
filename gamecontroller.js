@@ -123,6 +123,7 @@ push_export({
   'SDL_GameControllerIsSensorEnabled': ['int', ['void*', 'int']],
   'SDL_GameControllerGetSensorDataRate': ['float', ['void*', 'int']],
   'SDL_GameControllerGetSensorData': ['int', ['void*', 'int', 'float*', 'int']],
+  'SDL_GameControllerGetSensorDataWithTimestamp': ['int', ['void*', 'int', 'Uint64', 'float*', 'int']],
   'SDL_GameControllerRumble': ['int', ['void*', 'Uint16', 'Uint16', 'Uint32']],
   'SDL_GameControllerRumbleTriggers': ['int', ['void*', 'Uint16', 'Uint16', 'Uint32']],
   'SDL_GameControllerHasLED': ['int', ['void*']],

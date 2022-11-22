@@ -52,7 +52,10 @@ e.SDL_POWERSTATE_CHARGING = en();
 e.SDL_POWERSTATE_CHARGED = en();
 
 // SDL_revision.h
-e.SDL_REVISION = 'https://github.com/libsdl-org/SDL.git@55b03c7493a7abed33cf803d1380a40fa8af903f';
+e.SDL_REVISION = 'SDL-release-2.26.0-0-g0bfeed061';
+if (defines['SDL_VENDOR_INFO']) {
+  e.SDL_REVISION += ' (' + defines['SDL_VENDOR_INFO'] + ')';
+}
 e.SDL_REVISION_NUMBER = 0;
 
 // SDL_system.h
@@ -114,6 +117,9 @@ push_export({
   'SDL_SetClipboardText': ['int', ['string']],
   'SDL_GetClipboardText': ['string', []],
   'SDL_HasClipboardText': ['int', []],
+  'SDL_SetPrimarySelectionText': ['int', ['string']],
+  'SDL_GetPrimarySelectionText': ['string', []],
+  'SDL_HasPrimarySelectionText': ['int', []],
   // SDL_cpuinfo.h
   'SDL_GetCPUCount': ['int', []],
   'SDL_GetCPUCacheLineSize': ['int', []],

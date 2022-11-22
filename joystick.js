@@ -99,6 +99,7 @@ push_export({
   'SDL_JoystickGetType': ['int', ['void*']],
   'SDL_JoystickGetGUIDString': ['void', [e.SDL_JoystickGUID, 'string', 'int']],
   'SDL_JoystickGetGUIDFromString': [e.SDL_JoystickGUID, ['string']],
+  'SDL_GetJoystickGUIDInfo': ['void', [e.SDL_JoystickGUID, 'Uint16*', 'Uint16*', 'Uint16*', 'Uint16*']],
   'SDL_JoystickGetAttached': ['int', ['void*']],
   'SDL_JoystickInstanceID': ['int32', ['void*']],
   'SDL_JoystickNumAxes': ['int', ['void*']],

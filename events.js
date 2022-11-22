@@ -171,8 +171,10 @@ e.SDL_MouseWheelEvent = Struct({
   x: 'int32',
   y: 'int32',
   direction: 'Uint32',
-  preciseX: 'Uint8',
-  preciseY: 'Uint8'
+  preciseX: 'float',
+  preciseY: 'float',
+  mouseX: 'int32',
+  mouseY: 'int32'
 });
 e.SDL_JoyAxisEvent = Struct({
   type: 'Uint32',
@@ -265,7 +267,8 @@ e.SDL_ControllerSensorEvent = Struct({
   timestamp: 'Uint32',
   which: 'int32',
   sensor: 'int32',
-  data: ArrayType('float', 3)
+  data: ArrayType('float', 3),
+  timestamp_us: 'Uint64'
 });
 e.SDL_AudioDeviceEvent = Struct({
   type: 'Uint32',
@@ -319,7 +322,8 @@ e.SDL_SensorEvent = Struct({
   type: 'Uint32',
   timestamp: 'Uint32',
   which: 'int32',
-  data: 'float*'
+  data: ArrayType('float', 6),
+  timestamp_us: 'Uint64'
 });
 e.SDL_QuitEvent = Struct({
   type: 'Uint32',
