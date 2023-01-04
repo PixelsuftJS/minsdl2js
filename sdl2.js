@@ -52,7 +52,7 @@ e.SDL_POWERSTATE_CHARGING = en();
 e.SDL_POWERSTATE_CHARGED = en();
 
 // SDL_revision.h
-e.SDL_REVISION = 'SDL-release-2.26.1-0-gf17058b56';
+e.SDL_REVISION = 'SDL-release-2.26.2-0-gf070c83a6';
 if (defines['SDL_VENDOR_INFO']) {
   e.SDL_REVISION += ' (' + defines['SDL_VENDOR_INFO'] + ')';
 }
