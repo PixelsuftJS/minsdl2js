@@ -56,8 +56,8 @@ sdl2.load_sdl2_ttf_library(prefix + 'SDL2_ttf' + postfix);
 sdl2.load_sdl2_mixer_library(prefix + 'SDL2_mixer' + postfix);
 sdl2.load_sdl2_net_library(prefix + 'SDL2_net' + postfix);
 sdl2.load_sdl2_gfx_library(prefix + 'SDL2_gfx' + postfix);
-sdl2.load_sdl2_sound_library(prefix + 'SDL2_sound' + postfix);
-sdl2.load_sdl2_gpu_library(prefix + 'SDL2_gpu' + postfix);
+// sdl2.load_sdl2_sound_library(prefix + 'SDL2_sound' + postfix);
+// sdl2.load_sdl2_gpu_library(prefix + 'SDL2_gpu' + postfix);
 sdl2.export_sdl2_library(global);
 sdl2.export_sdl2_image_library(global);
 sdl2.export_sdl2_ttf_library(global);
@@ -65,8 +65,8 @@ sdl2.export_sdl2_ttf_library(global);
 sdl2.export_sdl2_mixer_library(global);
 sdl2.export_sdl2_net_library(global);
 sdl2.export_sdl2_gfx_library(global);
-sdl2.export_sdl2_sound_library(global);
-sdl2.export_sdl2_gpu_library(global);
+// sdl2.export_sdl2_sound_library(global);
+// sdl2.export_sdl2_gpu_library(global);
 if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_AUDIO))
   fatal();
 if (!IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG))
@@ -77,8 +77,8 @@ if (!Mix_Init(MIX_INIT_MP3 | MIX_INIT_OGG | MIX_INIT_MID | MIX_INIT_OPUS))
   fatal();
 if (SDLNet_Init())
   fatal();
-if (!Sound_Init())
-  fatal();
+// if (!Sound_Init())
+//   fatal();
 // if (!GPU_Init())
 //   fatal();
 log(`CPU: ${SDL_GetCPUCount()} CPUs, RAM: ${SDL_GetSystemRAM()}MB`);
@@ -132,11 +132,11 @@ SDL_SetAssertionHandler(log, null);
 /*const wavSpec = new SDL_AudioSpec;
 const wavLength = new Uint32Array(1);
 const wavBuffer = ref.ref(new Uint8Array(19574784));
-SDL_LoadWAV('d:/music/hatebit - track3.wav', wavSpec.ref(), wavBuffer, wavLength);
+SDL_LoadWAV('e:/music/hatebit - track3.wav', wavSpec.ref(), wavBuffer, wavLength);
 const deviceId = SDL_OpenAudioDevice(null, 0, wavSpec.ref(), null, 0);
 const success = SDL_QueueAudio(deviceId, wavBuffer.deref(), wavLength);
 SDL_PauseAudioDevice(deviceId, 0);*/
-const music_path = 'D:/Music/Master Boot Record - XCOPY.EXE.mp3';
+const music_path = 'E:/Music/Master Boot Record - XCOPY.EXE.mp3';
 var music;
 if (fs.existsSync(music_path)) {
   Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 320);
@@ -145,7 +145,7 @@ if (fs.existsSync(music_path)) {
 }
 
 const timer_freq = SDL_GetPerformanceFrequency();
-const bg_path = 'D:/other/win7.png';
+const bg_path = 'E:/other/win7.png';
 const font_path = 'C:/Windows/Fonts/segoeuib.ttf';
 const bg = fs.existsSync(bg_path) ? IMG_Load(bg_path) : null;
 const bg_texture = bg ? SDL_CreateTextureFromSurface(renderer, bg) : null;
@@ -179,7 +179,7 @@ async function tick() {
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
         // GPU_Quit();
-        Sound_Quit();
+        // Sound_Quit();
         SDLNet_Quit();
         if (music) {
           Mix_FreeMusic(music);
